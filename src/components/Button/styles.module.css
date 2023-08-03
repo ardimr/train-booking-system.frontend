@@ -1,0 +1,81 @@
+.primaryButton {
+    border: 0;
+    /* position: absolute; */
+    width: 160px;
+    height: 35px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background-color: #43A1FE;
+}
+
+.primaryButton:hover {
+    border: 0;
+    /* position: absolute; */
+    width: 160px;
+    height: 35px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background-color: #90C6FF;
+}
+
+.primaryButton:active {
+    border: 0;
+    /* position: absolute; */
+    width: 160px;
+    height: 35px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background-color: #6D90B2;
+}
+
+.primaryButton:disabled {
+    border: 0;
+    /* position: absolute; */
+    width: 160px;
+    height: 35px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background-color: #E3E9F0;
+}
+
+.primaryButton text {
+    color: #ffffff;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.primaryButton:hover text {
+    color: #ffffff;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.primaryButton:active text {
+    color: #ffffff;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.primaryButton:disabled text {
+    color: #9aa5af;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.submitText {
+    color: #FFF;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+

@@ -1,0 +1,9 @@
+
+.searchStations {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 300px;
+    background-color: aqua;
+
+}
