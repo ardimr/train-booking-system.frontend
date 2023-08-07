@@ -1,5 +1,8 @@
 import React from 'react'
 import styles from './style.module.css'
+import {MdTrain} from 'react-icons/md'
+import {TbMinusVertical} from "react-icons/tb"
+
 interface InputProps {
   type: 'text' | 'number' | 'email' | 'password'
   label: string
@@ -20,8 +23,10 @@ const Input: React.FC<InputProps> = (
     setShowSuggestions(true)
   }
   return (
+    <span className={styles.searchInput}>
+      <MdTrain className={styles.trainIcon} />
       <input
-        className={styles.searchInput}
+        className={styles.innerInput}
         onFocus={handleOnActive}
         type={type}
         id={label}
@@ -32,6 +37,8 @@ const Input: React.FC<InputProps> = (
         disabled={disabled}
         autoComplete='off'
       />  
+    </span>
+      
   )
 }
 

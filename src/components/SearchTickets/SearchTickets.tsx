@@ -12,7 +12,7 @@ const queryQlient = new QueryClient()
   return (
     <div className={styles.searchTickets}>
         <div className={styles.title}>
-            Book and But Train Tickets
+            Book and Buy Train Tickets
         </div>
         <div style={{width:'100%', height:'15px'}} />
         <div className={styles.SearchStationsContainer}>
@@ -21,7 +21,7 @@ const queryQlient = new QueryClient()
                 <div className={styles.stationTitle}> Origin </div>
                 <SearchStations />
               </div>
-              <div style={{width:'50px'}}>
+              <div style={{width:'100px'}}>
                 
               </div>
               <div className={styles.destinationStationBox}>

@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './styles.module.css'
 import PrimaryButton from '../Button/primary_button'
+import {BsArrowRightCircle} from 'react-icons/bs'
 const TravelCard = () => {
   return (
     <div className={styles.travelCard}>
@@ -22,7 +23,10 @@ const TravelCard = () => {
                 </div>
             </div>
             <div className={styles.subContainer2}>
-                <div style={{margin:"10px"}}>
+                <div style={{marginLeft:'25%'}}>
+                    <BsArrowRightCircle  />
+                </div>
+                <div style={{marginTop:"10px", marginLeft:'10%'}}>
                     5j 47m
                 </div>
             </div>
