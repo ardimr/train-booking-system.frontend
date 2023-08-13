@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './style.module.css'
+import styles from './station.module.css'
 import {MdTrain} from 'react-icons/md'
 import {TbMinusVertical} from "react-icons/tb"
 

@@ -3,7 +3,7 @@ import { DataModel } from "../Dropdown/Model"
 
 import React from 'react'
 import DropdownList from "../Dropdown/DropdownList"
-import Input from "../Input/input"
+import Input from "../Input/InputStation"
 import { useQuery } from "react-query";
 import styles from './styles.module.css'
 import { useOnClickOutside } from "usehooks-ts"

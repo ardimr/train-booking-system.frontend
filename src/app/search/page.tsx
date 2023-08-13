@@ -3,7 +3,7 @@ import SearchTickets from '@/components/SearchTickets/SearchTickets'
 import TravelCard from '@/components/TravelCard/TravelCard'
 const home = () => {
   return (
-    <div>
+    <div style={{display: "flex", flexDirection:"column", alignItems:"center"}}>
         <SearchTickets />
         <div style={{height:'50px'}} />
         <TravelCard />

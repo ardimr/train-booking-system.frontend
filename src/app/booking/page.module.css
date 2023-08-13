@@ -1,0 +1,8 @@
+.bookingPage {
+    width: 635px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    /* background-color: azure; */
+
+}
