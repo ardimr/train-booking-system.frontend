@@ -3,7 +3,6 @@ import styles from './styles.module.css'
 interface InputProps {
     type: 'text' | 'number' | 'email' | 'password'
     label: string
-    value: string | number
     name: string
     placeholder: string
     // error: boolean
@@ -11,7 +10,7 @@ interface InputProps {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   }
 const Input: React.FC<InputProps> = (
-    { value , type, label, name, placeholder, disabled, onChange} : InputProps
+    { type, label, name, placeholder, disabled, onChange} : InputProps
 ) => {
   return (
     <div className={styles.inputContainer}>
@@ -20,10 +19,9 @@ const Input: React.FC<InputProps> = (
             placeholder={placeholder}
             id={label}
             name={name}
-            value={value}
             onChange={onChange}
             disabled={disabled}
-            autoComplete='off'
+            autoComplete= "off"
         />
             
     </div>
