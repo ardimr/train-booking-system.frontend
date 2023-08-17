@@ -5,6 +5,10 @@
     border-radius: 5px;
 }
 
+.inputInner:hover{
+    border: 2px solid #000000;
+}
+
 .inputInner{
     box-sizing: border-box;
     border-radius: 5px;
