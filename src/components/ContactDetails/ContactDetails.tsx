@@ -4,12 +4,39 @@ import styles from './styles.module.css'
 import Input from '../Input/Input'
 import CountryCode from '../CountryCode/CountryCode'
 import { CountryCodeModel } from '../CountryCode/CountryCode'
+import { useForm, SubmitHandler, Controller } from "react-hook-form"
+
+
+interface IFormInput {
+    fullName : string
+    email : string
+    countryCode: CountryCodeModel
+    phoneNumber : string
+}
+
 const ContactDetails = () => {
-    const [fullName, setFullName] = useState("")
-    const [email, setEmail] = useState("")
-    const [phoneNumber, setPhoneNumber] = useState("")
+    // const [fullName, setFullName] = useState("")
+    // const [email, setEmail] = useState("")
+    // const [phoneNumber, setPhoneNumber] = useState("")
     const [countryCode, setCountryCode] = useState<CountryCodeModel>({flagCode: "ID", label: "Indonesia (+62)", dialCode:"+62"})
-    
+    const {register, handleSubmit, getValues, setValue} = useForm<IFormInput>({
+        defaultValues: {
+            fullName: "",
+            email: "",
+            phoneNumber: "",
+            countryCode: {
+                dialCode: "+62",
+                flagCode: "ID",
+                label: "Indonesia (+62)"
+            },
+        }
+    })
+
+    const onSubmit: SubmitHandler<IFormInput> = (data) => {
+        console.log(data)
+        // console.log(getValues("countryCode"))
+    }
+
     const options: CountryCodeModel[] = [
       {dialCode : "+62", label: "Indonesia (+62)", flagCode: "ID"},
       {dialCode : "+1", label: "USA (+1)", flagCode: "US"},
@@ -21,35 +48,37 @@ const ContactDetails = () => {
       
     ]
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFullName(e.target.value)
+        setValue("fullName", e.target.value)
     }
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.target.value)
+        setValue("email", e.target.value)
     }
 
     const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPhoneNumber(e.target.value)
+        setValue("phoneNumber", e.target.value)
     }
 
     const handleCountryCodeChange = (countryCode:CountryCodeModel) => {
         setCountryCode(countryCode)
+        setValue("countryCode", countryCode)
     }
 
     return (
-    <div className={styles.contactDetails}>
+    <form className={styles.contactDetails} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.fullName}>
             <div style={{padding: "5px 0"}}>
                 Full Name
             </div>
             <Input 
+                {...register("fullName", { required: true})}
                 type='text' 
                 placeholder='Enter your full name' 
                 label='Full Name'
                 name='Full Name'
-                value={fullName}
                 onChange={handleNameChange}
             />
+            
         </div>
         
         <div className={styles.phone}>
@@ -57,18 +86,23 @@ const ContactDetails = () => {
                 <div style={{padding: "5px 0"}}>
                     Country Code
                 </div>
-                <CountryCode options={options} value={countryCode} onSelect={handleCountryCodeChange} />
+                <CountryCode
+                    {...register("countryCode")} 
+                    options={options}
+                    value={countryCode}
+                    onSelect={handleCountryCodeChange} 
+                />
             </div>
             <div className={styles.phoneNumber}>
                 <div style={{padding: "5px 0"}}>
                     Phone Number
                 </div>
                 <Input 
+                    {...register("phoneNumber", { required: true})}
                     type='text' 
                     placeholder='8123456789' 
                     label='phone number'
                     name='phone number'
-                    value={phoneNumber}
                     onChange={handlePhoneNumberChange}
                 />
             </div>
@@ -79,15 +113,16 @@ const ContactDetails = () => {
                 Email
             </div>
             <Input 
+                 {...register("email", { required: true})}
                 type='text' 
                 placeholder='Enter your email' 
                 label='email'
                 name='email'
-                value={email}
                 onChange={handleEmailChange}
             />
         </div>
-    </div>
+        <button type='submit' style={{width:"200px", height:"20px"}}/>
+    </form>
   )
 }
 
