@@ -6,6 +6,7 @@ import styles from './styles.module.css'
 import { DevTool } from "@hookform/devtools";
 import {z} from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
+import { useRegistration, RegistrationData, registerUser } from '@/hooks/useRegister';
 
 interface IFormInput {
     fullName : string
@@ -26,6 +27,7 @@ const schema = z.object({
   message: "Password don't match",
 });
 const RegistrationForm = () => {
+  
   const {register, handleSubmit, formState, control,  getValues, setValue, reset} = useForm<IFormInput>(
     {
         defaultValues: {
@@ -40,8 +42,21 @@ const RegistrationForm = () => {
   )
 
   const {errors, dirtyFields, touchedFields, isDirty, isValid, isSubmitSuccessful} = formState
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+  
+  const {mutate: registerUser} = useRegistration()
+
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     console.log(data)
+    
+    const registrationData: RegistrationData = {
+      name : data.fullName,
+      username: data.username,
+      email: data.email,
+      password: data.password,
+
+    }
+    registerUser(registrationData)
+    
     if (isSubmitSuccessful) {
       reset()
     }
@@ -74,7 +89,7 @@ const RegistrationForm = () => {
         <p className={styles.error}> {errors.password?.message}</p>
 
         <label className={styles.label} htmlFor='password'>Password</label>
-        <input className={styles.input} type='password' placeholder='Enter password' {...register("confirmPassword", {required: true})}/>
+        <input className={styles.input} type='password' placeholder='Confirm password' {...register("confirmPassword", {required: true})}/>
         <p className={styles.error}> {errors.confirmPassword?.message}</p>
 
         <button className={styles.submitButton} type='submit' disabled={!isDirty || !isValid} > Register </button>
