@@ -14,5 +14,11 @@ export const registerUser = (registrationData: RegistrationData) => {
 }
 
 export const useRegistration = () => {
-  return useMutation(registerUser)
+  return useMutation(registerUser,
+      {
+        onError: (error) => {
+          console.log(error)
+        },
+      }
+    )
 }
