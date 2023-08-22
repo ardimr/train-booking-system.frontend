@@ -5,42 +5,17 @@ import Input from '../Input/Input'
 import { useForm, SubmitHandler, FieldErrors } from 'react-hook-form'
 import {z} from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
-import useSWR from 'swr'
-import { useMutation } from 'react-query'
-import { json } from 'stream/consumers'
+import { useLogin, loginUser, LoginData } from '@/hooks/useLogin'
 
 interface IFormInput {
   username: string
   password: string
 }
-interface ILoginResponse {
-  
-}
+
 const schema = z.object({
   username: z.string().nonempty("Username is required"),
   password: z.string().nonempty("Password can't be empty").min(6),
 })
-
-const loginFetcher = async (formData: IFormInput) => {
-  const  credentials = btoa(`${formData.username}:${formData.password}`);
-  const res = await fetch(
-    `http://localhost:8080/api/auth/signin`, {
-      method: 'POST',
-      body: JSON.stringify(formData),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Basic ${credentials}`,
-      },
-    }
-  )
-  return res.json()
-}
-
-const useLogin = (loginData:IFormInput) => {
-  // const { data, error } = useSWR(`http://localhost:8080/api/auth/signin`, (url) => loginFetcher(url, loginData))
-  // const {login} = useMutation(loginFetcher)
-  // return {data, error}
-}
 
 const LoginForm = () => {
   const {register, handleSubmit, formState, getValues, setValue, reset} = useForm<IFormInput>(
@@ -53,14 +28,21 @@ const LoginForm = () => {
     }
   )
   const {errors, dirtyFields, touchedFields, isDirty, isValid, isSubmitSuccessful} = formState
-  // const mutation = useMutation({mutationFn: loginFetcher})
  
+  const {mutate:loginUser, isError, data} = useLogin()
   const onSubmit: SubmitHandler<IFormInput> = async (formData) => {
     console.log(formData)
     
     // Login
-    const data = await loginFetcher(formData)
-    console.log(data)
+    const loginData: LoginData = {
+      username: formData.username,
+      password: formData.password
+    }
+
+    loginUser(loginData)
+
+    console.log(data?.data)
+
     if (isSubmitSuccessful) {
       reset()
     }
