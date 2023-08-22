@@ -8,7 +8,7 @@ import CustomDatePicker from '../DatePicker/DatePicker'
 import PrimaryButton from '../Button/primary_button'
 
 const SearchTickets = () => {
-const queryQlient = new QueryClient()
+  const queryQlient = new QueryClient()
   return (
     <div className={styles.searchTickets}>
         <div className={styles.title}>
