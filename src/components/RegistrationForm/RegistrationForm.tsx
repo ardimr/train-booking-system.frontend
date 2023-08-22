@@ -43,7 +43,7 @@ const RegistrationForm = () => {
 
   const {errors, dirtyFields, touchedFields, isDirty, isValid, isSubmitSuccessful} = formState
   
-  const {mutate: registerUser} = useRegistration()
+  const {mutate: registerUser, isError} = useRegistration()
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     console.log(data)
@@ -63,7 +63,7 @@ const RegistrationForm = () => {
     
   }
 
-  const onError = (erros: FieldErrors<IFormInput>) =>  {
+  const onError = (errors: FieldErrors<IFormInput>) =>  {
     console.log("Form errors", errors)
   }
 
@@ -92,7 +92,9 @@ const RegistrationForm = () => {
         <input className={styles.input} type='password' placeholder='Confirm password' {...register("confirmPassword", {required: true})}/>
         <p className={styles.error}> {errors.confirmPassword?.message}</p>
 
-        <button className={styles.submitButton} type='submit' disabled={!isDirty || !isValid} > Register </button>
+        {isError && <p className={styles.error}> Failed to register user</p>}
+
+        <button className={styles.submitButton} style={{alignSelf:"center"}} type='submit' disabled={!isDirty || !isValid} > Register </button>
       </form>
       {/* <DevTool control={control} />  */}
     </div>
