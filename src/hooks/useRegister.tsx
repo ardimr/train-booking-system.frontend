@@ -1,5 +1,5 @@
 import { useQuery, useMutation } from "react-query";
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 
 export interface RegistrationData {
   name: string
@@ -13,11 +13,16 @@ export const registerUser = (registrationData: RegistrationData) => {
   return axios.post('http://localhost:8080/api/user-management/users', registrationData, {headers})
 }
 
+// interface useRegistrationProps {
+//   onErrorCallback?: (error: AxiosError) => void | undefined;
+// }
+
 export const useRegistration = () => {
   return useMutation(registerUser,
       {
-        onError: (error) => {
-          console.log(error)
+        onError: (error: AxiosError) => {
+          console.error(error)
+          // props?.onErrorCallback?.(error)          
         },
       }
     )

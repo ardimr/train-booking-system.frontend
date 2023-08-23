@@ -43,7 +43,7 @@ const RegistrationForm = () => {
 
   const {errors, dirtyFields, touchedFields, isDirty, isValid, isSubmitSuccessful} = formState
   
-  const {mutate: registerUser, isError} = useRegistration()
+  const {mutate: registerUser, isError, error} = useRegistration()
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     console.log(data)
@@ -55,6 +55,7 @@ const RegistrationForm = () => {
       password: data.password,
 
     }
+
     registerUser(registrationData)
     
     if (isSubmitSuccessful) {
@@ -92,7 +93,7 @@ const RegistrationForm = () => {
         <input className={styles.input} type='password' placeholder='Confirm password' {...register("confirmPassword", {required: true})}/>
         <p className={styles.error}> {errors.confirmPassword?.message}</p>
 
-        {isError && <p className={styles.error}> Failed to register user</p>}
+        {error && <p className={styles.error}>{error.message}</p>}
 
         <button className={styles.submitButton} style={{alignSelf:"center"}} type='submit' disabled={!isDirty || !isValid} > Register </button>
       </form>
