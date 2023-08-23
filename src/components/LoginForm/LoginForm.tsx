@@ -58,7 +58,7 @@ const LoginForm = () => {
         <input  className={styles.input} type='text' placeholder='Enter username' {...register("username", {required: true})}/>
         
         <label className={styles.label} htmlFor='password'>Password</label>
-        <input className={styles[".input-large"]}  type='password' placeholder='Enter password' {...register("password", {required: true})}/>
+        <input className={styles["input"]}  type='password' placeholder='Enter password' {...register("password", {required: true})}/>
         
         <button className={styles.submitButton} type='submit' disabled={!isDirty || !isValid}> Login </button>
     </form>
