@@ -1,29 +1,24 @@
 import React from 'react'
 import styles from './styles.module.css'
 import SeatRow, { RowElement } from './SeatRow'
-
-type SeatRow = {
-    seat : RowElement[]
+import SeatColumn from './SeatColumn'
+import { seatRows } from './data'
+export type SeatRow = {
+    row_elements : RowElement[]
 }
 
+
+
 const SeatSelections = () => {
-  const seatRows:SeatRow[] = [
-    {seat: [
-        {seatNumber: 1}, {seatNumber: 2}, {seatNumber: 3}, {seatNumber: 4}
-        ]
-    },
-    { seat: [
-        {seatNumber: 5}, {seatNumber: 6}, {seatNumber: 7}, {seatNumber: 8}
-        ]
-    }
-  ]
-    
   
   return (
-    <div className={styles.seatSelection}>    
+    <div className={styles.seatSelection}>
+
+        <SeatColumn />
+ 
         {
             seatRows.map(
-                (seatRow) => <SeatRow />
+                (seatRow, index) =>  <SeatRow key={index} rowElements={seatRow.row_elements} rowIndex={index+1}/>
             )
         }
     </div>
@@ -31,3 +26,4 @@ const SeatSelections = () => {
 }
 
 export default SeatSelections
+
