@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './styles.module.css'
-const SeatColumn = () => {
+
+const SeatHeader = () => {
   const columnHeaders: string[] = ["A", "B", "", "C", "D"]
 
   return (
@@ -12,4 +13,4 @@ const SeatColumn = () => {
   )
 }
 
-export default SeatColumn
+export default SeatHeader

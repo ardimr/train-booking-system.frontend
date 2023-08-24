@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import styles from './styles.module.css'
+import { RowElement } from './data'
 
 enum seatAvailability{
     available,
@@ -10,18 +11,36 @@ enum seatAvailability{
 }
 
 interface SeatProps {
-  rowIndex: number
+  seatData: RowElement,
+  activeSeats : number[]
+  handleSelectSeats: (seatData: RowElement) => void
 }
-const Seat = () => {
-  const [status, setStatus] = useState<seatAvailability>(seatAvailability.available)
-  const [isSelected, setIsSelected] = useState<boolean>(false)
+
+const Seat = ({seatData, activeSeats, handleSelectSeats}:SeatProps) => {
   
-  const handleOnSelect = () => {
-    setIsSelected(true)
+  const [status, setStatus] = useState<seatAvailability>(seatAvailability.available)
+  
+  const isSelected = activeSeats?.includes(seatData.seat_id)
+
+  const onClickHandler = (event: React.MouseEvent<HTMLInputElement>) => {
+    handleSelectSeats(seatData)
   }
   return (
-    <div className={isSelected? styles["singleSeat-selected"] : styles["singleSeat"]} onClick={handleOnSelect}>
-        <p>{isSelected}</p>
+    <div>
+      {seatData.available? 
+        (
+        <div className={isSelected? styles["singleSeat-selected"] : styles["singleSeat"]} onClick={onClickHandler}>
+          
+        </div>
+        ) : 
+        (
+          <div className={styles["singleSeat-not-available"]}>
+            <div style={{color:"white", fontSize:"large"}}>
+              X
+            </div>
+          </div>
+        ) 
+    }
     </div>
   )
 }
