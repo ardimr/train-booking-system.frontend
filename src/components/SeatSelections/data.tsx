@@ -21,7 +21,8 @@ export const passengers:PassengerData[] = [
 ]
 
 export type PassengerSeat = {
-  [key:number]:number 
+  passengerNumber: number
+  seatId: number
 }
 
 export const seatRows:SeatRow[] = [

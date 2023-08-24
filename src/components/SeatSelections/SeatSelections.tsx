@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import styles from './styles.module.css'
 import SeatRow from './SeatRow'
 import SeatColumn from './SeatHeader'
-import { PassengerData, RowElement, passengers, seatRows } from './data'
+import { PassengerData, PassengerSeat, RowElement, passengers, seatRows } from './data'
 import SeatHeader from './SeatHeader'
 import Passenger from './Passenger'
 import SeatLegends from './SeatLegends'
@@ -11,11 +11,13 @@ import Wagons from './Wagons'
 
 
 const SeatSelections = () => {
-  const [selectedSeats, setSelectedSeats] = useState<number[]>([])
+  const [selectedSeats, setSelectedSeats] = useState<PassengerSeat[]>(new Array(2))
   const [activePassenger, setActivePassenger] = useState<number>(0)
-  
-  const handleSelectSeat = (seatData: RowElement) => {
-    setSelectedSeats([seatData.seat_id])
+
+  const handleSelectSeat = (seatData: RowElement, activePassenger:number) => {
+    // find the passenger and update the seat id
+
+    // setSelectedSeats([seatData.seat_id])
   }
 
   const handleActivePassenger = (passengerNumber: number) => {
@@ -36,7 +38,15 @@ const SeatSelections = () => {
           <SeatHeader />
           {
               seatRows.map(
-                  (seatRow, index) =>  <SeatRow key={index} rowElements={seatRow.row_elements} rowIndex={index+1} activeSeats={selectedSeats} handleSelectSeats={handleSelectSeat}/>
+                  (seatRow, index) => 
+                    <SeatRow 
+                      key={index}
+                      rowElements={seatRow.row_elements}
+                      rowIndex={index+1}
+                      activeSeats={selectedSeats}
+                      handleSelectSeats={handleSelectSeat}
+                      activePassenger={activePassenger}
+                    />
               )
           }
           </div>
