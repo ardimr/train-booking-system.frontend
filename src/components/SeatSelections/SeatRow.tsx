@@ -1,19 +1,20 @@
 import React from 'react'
 import Seat from './Seat'
 import styles from './styles.module.css'
-import { RowElement } from './data'
+import { PassengerSeat, RowElement } from './data'
 
 
 
 interface props {
     rowElements: RowElement[]
     rowIndex: number
-    handleSelectSeats: (seatData: RowElement) => void
-    activeSeats: number[]
+    handleSelectSeats: (seatId: number, activePassenger:number) => void
+    activeSeats: PassengerSeat[]
+    activePassenger: number
 }
 
 
-const SeatRow: React.FC<props> = ({rowElements, rowIndex, handleSelectSeats, activeSeats} :props) => {
+const SeatRow: React.FC<props> = ({rowElements, rowIndex, handleSelectSeats, activeSeats, activePassenger} :props) => {
     // const rowIndex = rowElements[0].seat_row
     
     
@@ -21,12 +22,12 @@ const SeatRow: React.FC<props> = ({rowElements, rowIndex, handleSelectSeats, act
     <div className={styles.seatRow}>
         {
           rowElements.slice(0,2).map(
-              (seatData, index) => ( <Seat seatData={seatData} key={index} activeSeats={activeSeats} handleSelectSeats={handleSelectSeats}/>)
+              (seatData, index) => ( <Seat seatData={seatData} key={index} activeSeats={activeSeats} handleSelectSeats={handleSelectSeats} activePassenger={activePassenger}/>)
         )}
         <div className={styles["row-index"]}>{rowIndex}</div>
         {
           rowElements.slice(2,4).map(
-              (seatData, index) => ( <Seat seatData={seatData} key={index} activeSeats={activeSeats} handleSelectSeats={handleSelectSeats}/>)
+              (seatData, index) => ( <Seat seatData={seatData} key={index} activeSeats={activeSeats} handleSelectSeats={handleSelectSeats} activePassenger={activePassenger}/>)
         )}
     </div>
   )
