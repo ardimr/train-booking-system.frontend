@@ -8,7 +8,7 @@ import { PassengerSeat, RowElement } from './data'
 interface props {
     rowElements: RowElement[]
     rowIndex: number
-    handleSelectSeats: (seatId: number, activePassenger:number) => void
+    handleSelectSeats: (seat: RowElement, activePassenger:number) => void
     activeSeats: PassengerSeat[]
     activePassenger: number
 }

@@ -20,7 +20,7 @@
     background-color: #E3E9F0;
 }
 
-.primaryButton text {
+.primaryButton div {
     color: #ffffff;
     font-size: 14px;
     font-style: normal;
@@ -28,7 +28,7 @@
     line-height: normal;
 }
 
-.primaryButton:hover text {
+.primaryButton:hover div {
     color: #ffffff;
     font-size: 14px;
     font-style: normal;
@@ -36,7 +36,7 @@
     line-height: normal;
 }
 
-.primaryButton:active text {
+.primaryButton:active div {
     color: #ffffff;
     font-size: 14px;
     font-style: normal;
@@ -44,7 +44,7 @@
     line-height: normal;
 }
 
-.primaryButton:disabled text {
+.primaryButton:disabled div {
     color: #9aa5af;
     font-size: 14px;
     font-style: normal;

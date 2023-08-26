@@ -1,18 +1,20 @@
 import React, { Children } from 'react'
 import styles from './styles.module.css'
 
-interface Props {
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     children?: React.ReactNode;
+    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
     disabled : boolean;
   }
 
 const PrimaryButton: React.FC<Props> = ({
     children,
-    disabled
+    disabled,
+    onClick,
 }: Props) => {
   return (
-    <button className={styles.primaryButton} disabled={disabled} type='submit'>
-        <text >{children} </text>
+    <button className={styles.primaryButton} disabled={disabled} type='submit' onClick={onClick}>
+        <div >{children} </div>
     </button>
   )
 }

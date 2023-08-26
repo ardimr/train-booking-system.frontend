@@ -14,16 +14,15 @@ interface SeatProps {
   seatData: RowElement,
   activeSeats : PassengerSeat[]
   activePassenger: number
-  handleSelectSeats: (seatId: number, activePassenger:number) => void
+  handleSelectSeats: (seat: RowElement, activePassenger:number) => void
 }
 
 const Seat = ({seatData, activeSeats, handleSelectSeats, activePassenger}:SeatProps) => {
     
-  const passengerSeat = activeSeats.find((passengerSeat) => {return passengerSeat.seatId === seatData.seat_id})
-  const isSelected = passengerSeat !== undefined
+  const passengerSeat = activeSeats.find((passengerSeat) => {return passengerSeat.seat?.seat_id === seatData.seat_id})
 
   const onClickHandler = (event: React.MouseEvent<HTMLInputElement>) => {
-    handleSelectSeats(seatData.seat_id, activePassenger)
+    handleSelectSeats(seatData, activePassenger)
   }
   
   return (

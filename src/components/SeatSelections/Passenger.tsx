@@ -1,15 +1,15 @@
 import React from 'react'
 import styles from './styles.module.css'
-import { PassengerData } from './data'
+import { PassengerData, PassengerSeat } from './data'
 
 interface PassengerProps {
   passengerNumber: number
-  passengerData: PassengerData
+  passengerSeat: PassengerSeat
   activePassenger: number
   handleActivePassenger: (passengerNumber: number) => void
 
 }
-const Passenger = ({passengerData,passengerNumber, activePassenger, handleActivePassenger}:PassengerProps) => {
+const Passenger = ({passengerSeat,passengerNumber, activePassenger, handleActivePassenger}:PassengerProps) => {
   const isActive = activePassenger === passengerNumber
   const onClickHandler = (event:React.MouseEvent<HTMLDivElement>) => {
     handleActivePassenger(passengerNumber)
@@ -20,8 +20,8 @@ const Passenger = ({passengerData,passengerNumber, activePassenger, handleActive
         {passengerNumber}
       </div>
       <div className={styles["passenger-info"]}>
-        <div className={styles["passenger-name"]}>{passengerData.name}</div>
-        <div className={styles["passenger-seat"]}>EXEC-1/3A</div>
+        <div className={styles["passenger-name"]}>{passengerSeat.passengerData.name}</div>
+        <div className={styles["passenger-seat"]}>{passengerSeat.seat?.seat_label}</div>
       </div>
     </div>
   )
