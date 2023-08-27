@@ -10,30 +10,35 @@ import SeatLegends from './SeatLegends'
 import Wagons from './Wagons'
 import PrimaryButton from '../Button/primary_button'
 import SeatsLayout from './SeatsLayout'
+import { useAvailableSeats } from '@/hooks/useAvailableSeats'
 
 
 
-const wagons:WagonSelector[] = [
-  {
-    wagon_class: "EKS",
-    wagon_number: 1,
-  },
-  {
-    wagon_class: "EKS",
-    wagon_number: 2,
-  },
-  {
-    wagon_class: "EKS",
-    wagon_number: 3,
-  }
-]
+// const wagons:WagonSelector[] = [
+//   {
+//     wagon_class: "EKS",
+//     wagon_number: 1,
+//   },
+//   {
+//     wagon_class: "EKS",
+//     wagon_number: 2,
+//   },
+//   {
+//     wagon_class: "EKS",
+//     wagon_number: 3,
+//   }
+// ]
 
 const SeatSelections = () => {
   // console.log(availableSeats)
+  const {isLoading, data} = useAvailableSeats(1, "EKS")
+  const wagons:WagonSelector[] = data?.map((data:any) => {return {"wagon_class": data.wagon_class, "wagon_number": data.wagon_number}})
+
   const [passengerSeats, setpassengerSeats] = useState<PassengerSeat[]>(initialPassengerSeats)
   const [activePassenger, setActivePassenger] = useState<number>(1)
-  const [activeWagon, setActiveWagon] = useState<WagonSelector>(wagons[0])
-  
+  const [activeWagon, setActiveWagon] = useState<WagonSelector>(isLoading? {wagon_class:"Loading", wagon_number:1}: wagons[0])
+
+
   const handleSelectSeat = (seat: RowElement, activePassenger:number) => {
     setpassengerSeats(
       passengerSeats.map((passengerSeat) => 
@@ -56,8 +61,7 @@ const SeatSelections = () => {
     console.log(passengerSeats)
   }
 
-  // activeSeats.find((passengerSeat) => {return passengerSeat.seat?.seat_id === seatData.seat_id})
-  const selectedWagonLayout = availableSeats.find((wagon) => {return wagon.wagon_number === activeWagon.wagon_number})
+  const layoutIndex:number = data?.findIndex((wagon:any) => {return wagon.wagon_number === activeWagon?.wagon_number})
 
   return (
     <div className={styles["seats-selection"]}>
@@ -72,11 +76,22 @@ const SeatSelections = () => {
           ))}
         </div>
         <div style={{display:"flex", flexDirection:"column"}}>
-          <div className={styles["seats-container"]}>
-            <SeatLegends/>
-            <Wagons wagons={wagons} activeWagon={activeWagon} handleActiveWagon={handleActiveWagon} />
-            <SeatsLayout seatRows={selectedWagonLayout!.seating_rows} passengerSeats={passengerSeats} activePassenger={activePassenger} handleSelectSeat={handleSelectSeat} />
-          </div>
+            
+            {isLoading
+              ?
+                <div className={styles["seats-container"]}>
+                  <SeatLegends/>
+                  {/* <Wagons wagons={wagons} activeWagon={activeWagon} handleActiveWagon={handleActiveWagon} /> */}
+                  {/* <SeatsLayout seatRows={data[0].seting_rows} passengerSeats={passengerSeats} activePassenger={activePassenger} handleSelectSeat={handleSelectSeat} /> */}
+                </div>
+              : (
+                <div className={styles["seats-container"]}>
+                  <SeatLegends/>
+                  <Wagons wagons={wagons} activeWagon={activeWagon} handleActiveWagon={handleActiveWagon} />
+                  <SeatsLayout seatRows={data[layoutIndex]!.seting_rows} passengerSeats={passengerSeats} activePassenger={activePassenger} handleSelectSeat={handleSelectSeat} />
+                </div>
+              )
+            } 
           <div className={styles["button"]}>
             <PrimaryButton disabled={false} onClick={handleOnDone}  > Done </PrimaryButton>
           </div>
