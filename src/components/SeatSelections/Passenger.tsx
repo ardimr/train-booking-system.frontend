@@ -21,7 +21,7 @@ const Passenger = ({passengerSeat,passengerNumber, activePassenger, handleActive
       </div>
       <div className={styles["passenger-info"]}>
         <div className={styles["passenger-name"]}>{passengerSeat.passengerData.name}</div>
-        <div className={styles["passenger-seat"]}>{passengerSeat.seat?.seat_label}</div>
+        <div className={styles["passenger-seat"]}>{passengerSeat.seat === null? "No Seat": passengerSeat.seat.seat_label}</div>
       </div>
     </div>
   )
