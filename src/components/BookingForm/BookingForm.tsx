@@ -123,7 +123,7 @@ const BookingForm = () => {
                 </div>
             </div>
             
-            {passengers.length>0 && <h1>Passengers</h1>}
+            {passengers.length>0 && <h1>Passenger Details</h1>}
             {
 
                 passengers.map((passenger, index) => (
