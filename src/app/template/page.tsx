@@ -1,7 +1,7 @@
 "use client"
 
 import PrimaryButton from '@/components/Button/primary_button'
-import DropdownList from '@/components/Dropdown/DropdownList'
+import DropdownList from '@/components/Dropdown/DropdownStations'
 import { DataModel } from '@/components/Dropdown/Model'
 import Input from '@/components/Input/input'
 import SearchStations from '@/components/SearchStations/SearchStations'

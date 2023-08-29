@@ -5,19 +5,14 @@
     width: 100%;
     height: 35px;
     box-sizing: border-box;
-    border-radius: 10px;
-}
-
-.trainIconBox{
-    position: absolute;
-    width: 20px;
-    background-color: brown;
     border-radius: 5px;
 }
+
 .trainIcon {
+    align-self: center;
     position: absolute;
     left: 10px;
-    font-size: larger;
+    font-size: 24px;
     /* width: 0px; */
 }
 .verticalDivider {
@@ -31,7 +26,7 @@
     height: 100%;
     padding-left: 40px;
     font-size: 16px;
-    /* border: none; */
+    border: 1px solid #929292;
     box-sizing: border-box;
     border-radius: 5px;
 }

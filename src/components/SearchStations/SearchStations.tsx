@@ -1,8 +1,8 @@
 import { useState, useRef } from "react"
-import { DataModel } from "../Dropdown/Model"
+import { DataModel } from "../DropdownStations/Model"
 
 import React from 'react'
-import DropdownList from "../Dropdown/DropdownList"
+import DropdownStations from "../DropdownStations/DropdownStations"
 import Input from "../Input/InputStation"
 import { useQuery } from "react-query";
 import styles from './styles.module.css'
@@ -62,7 +62,7 @@ const SearchStations = () => {
         placeholder='Search stations'
         value={stationInput}
       />
-      {showSuggestions &&  stations !=null && <DropdownList data = {stations}   setSelectedStationName={setStation} setShowSuggestions={setShowSuggestions}/>}
+      {showSuggestions &&  stations !=null && <DropdownStations data = {stations}   setSelectedStationName={setStation} setShowSuggestions={setShowSuggestions}/>}
     </div>
   )
 }

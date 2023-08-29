@@ -23,10 +23,10 @@ const TravelCard = () => {
                 </div>
             </div>
             <div className={styles.subContainer2}>
-                <div style={{marginLeft:'25%'}}>
-                    <BsArrowRightCircle  />
+                <div style={{alignSelf:'center'}}>
+                    <BsArrowRightCircle fontSize={20}  />
                 </div>
-                <div style={{marginTop:"10px", marginLeft:'10%'}}>
+                <div >
                     5j 47m
                 </div>
             </div>

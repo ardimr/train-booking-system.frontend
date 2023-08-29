@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './station.module.css'
-import {MdTrain} from 'react-icons/md'
+import {LiaTrainSolid} from 'react-icons/lia'
 import {TbMinusVertical} from "react-icons/tb"
 
 interface InputProps {
@@ -24,7 +24,7 @@ const Input: React.FC<InputProps> = (
   }
   return (
     <span className={styles.searchInput}>
-      <MdTrain className={styles.trainIcon} />
+      <LiaTrainSolid className={styles.trainIcon} />
       <input
         className={styles.innerInput}
         onFocus={handleOnActive}
