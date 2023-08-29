@@ -1,19 +1,35 @@
 import React from 'react'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
+import { SxProps } from '@mui/material';
 
 interface props {
     value:Dayjs | null
     setValue:React.Dispatch<React.SetStateAction<Dayjs | null>>
-}
+} 
 const CustomDatePicker: React.FC<props> = (
     { value, setValue }
 ) => {
     // const onChangeHandler = 
+  const dateSx: SxProps = {
+  "& .MuiInputBase-root" : {
+    // height:"100%",
+    alignSelf:"center",
+    "& .MuiInputBase-input" : {
+      padding: "8px 12px"
+    }
+    },
+ 
+  }
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker format='DD/MM/YYYY' value={value} onChange={(newValue) => {
+        <DatePicker
+          sx={dateSx}
+          format='DD/MM/YYYY'
+          value={value} 
+          minDate={dayjs()}
+          onChange={(newValue) => {
         setValue(newValue)
     }} />
     </LocalizationProvider>

@@ -3,7 +3,7 @@
 import React from 'react'
 import styles from './styles.module.css'
 
-import DropdownItem from './DropdownItem'
+import StationItem from './StationItem'
 import { DataModel } from './Model'
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
   setShowSuggestions: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const DropdownList: React.FC<Props> = ({
+const DropdownStations: React.FC<Props> = ({
   data ,
   setSelectedStationName,
   setShowSuggestions
@@ -28,7 +28,7 @@ const DropdownList: React.FC<Props> = ({
     <div className={styles.dropDownList} onBlur={onBlurHandler}>
       {data.map((data, index) => { 
         return (
-          <DropdownItem key={index} data={data} setSelectedStationName={setSelectedStationName} setShowSuggestions={setShowSuggestions}/>
+          <StationItem key={index} data={data} setSelectedStationName={setSelectedStationName} setShowSuggestions={setShowSuggestions}/>
         )
       })}
     </div>
@@ -36,4 +36,4 @@ const DropdownList: React.FC<Props> = ({
   )
 }
 
-export default DropdownList
+export default DropdownStations

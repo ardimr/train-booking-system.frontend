@@ -7,7 +7,7 @@ interface DropdownItemProps {
   setSelectedStationName: React.Dispatch<React.SetStateAction<string>>,
   setShowSuggestions: React.Dispatch<React.SetStateAction<boolean>>
 }
-const DropdownItem = (
+const StationItem = (
   {
     data,
     setSelectedStationName,
@@ -36,4 +36,4 @@ const DropdownItem = (
   )
 }
 
-export default DropdownItem
+export default StationItem
