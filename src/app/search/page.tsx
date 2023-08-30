@@ -7,6 +7,16 @@ const Search = () => {
         <SearchTickets />
         <div style={{height:'35px'}} />
         <TravelCard />
+        <TravelCard />
+        <TravelCard />
+        <TravelCard />
+        <TravelCard />
+        <TravelCard />
+        <TravelCard />
+        <TravelCard />
+        <TravelCard />
+        <TravelCard />
+        <TravelCard />
     </div>
   )
 }
