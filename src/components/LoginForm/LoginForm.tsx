@@ -8,6 +8,7 @@ import {zodResolver} from '@hookform/resolvers/zod'
 import { useLogin, loginUser, LoginData } from '@/hooks/useLogin'
 import PrimaryButton from '../Button/primary_button'
 import SecondaryButton from '../Button/SecondaryButton'
+import InputPassword from '../Input/InputPassword'
 
 interface IFormInput {
   username: string
@@ -60,7 +61,7 @@ const LoginForm = () => {
         <Input name='username' type='text' placeholder='Enter username' register={register} label='username'/>
         
         <label className={styles.label} htmlFor='password'>Password</label>
-        <Input name='password' label='password' type='password' placeholder='Enter password' register={register}/>
+        <InputPassword name='password' label='password' placeholder='Enter password' register={register}/>
         
         <SecondaryButton style={{marginTop:"15px", fontSize:"14px"}} type='submit' children='Submit' disabled={!isDirty || !isValid}/>
         {/* <button className={styles.submitButton} type='submit' disabled={!isDirty || !isValid}> Login </button> */}
