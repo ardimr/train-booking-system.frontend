@@ -147,15 +147,7 @@ const BookingForm = () => {
                       <div className={styles["label"]}>
                             Identity Type
                         </div>
-                        <select style={{
-                          // height:"40px", 
-                          // width:"100px", 
-                          padding:"8px 10px",
-                          background: "white",
-                          borderRadius: "5px",
-                          border: "1px solid #C5C5C5",
-                          marginTop: "5px"
-                        }}>
+                        <select className={styles["identity-type-dropdown"]}>
                           <option value={"KTP"}>KTP</option>
                           <option value={"Passport"}>Passport</option>
                         </select>

@@ -148,6 +148,17 @@
     /* background-color: rgb(37, 37, 37); */
 }
 
+.identity-type-dropdown{
+  padding:8px 10px;
+  background: white;
+  border-radius: 5px;
+  border: 1px solid #C5C5C5;
+  margin-top: 5px
+}
+
+.identity-type-dropdown:hover{
+  border: 1px solid black;
+}
 /* Travel Info */
 
 .travel-info-card {
