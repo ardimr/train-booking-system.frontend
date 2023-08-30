@@ -24,18 +24,20 @@ type Props = {
   placeholder:string
 }
 const SearchStations = ({placeholder}: Props) => {
-  const [stationInput, setStation] = useState('')
+  const [stationInput, setStationInput] = useState('')
+  const [selectedStation, setSelectedStation] = useState('')
   const [showSuggestions, setShowSuggestions] = useState(false)
   const ref = useRef(null)
 
   const handleClickOutside = () => {
+      setStationInput(selectedStation)
     if (showSuggestions) {
       setShowSuggestions(false)
     }
   }
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setStation(e.target.value)
+    setStationInput(e.target.value)
     setShowSuggestions(true)
     // console.log(stationFilteredList)
   }
@@ -66,7 +68,7 @@ const SearchStations = ({placeholder}: Props) => {
         placeholder={placeholder}
         value={stationInput}
       />
-      {showSuggestions &&  stations !=null && <DropdownStations data = {stations}   setSelectedStationName={setStation} setShowSuggestions={setShowSuggestions}/>}
+      {showSuggestions &&  stations !=null && <DropdownStations data = {stations}   setSelectedStationName={setSelectedStation} setShowSuggestions={setShowSuggestions}/>}
     </div>
   )
 }

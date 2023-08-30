@@ -29,6 +29,7 @@ const CustomDatePicker: React.FC<props> = (
           format='DD/MM/YYYY'
           value={value} 
           minDate={dayjs()}
+          maxDate={dayjs().add(1, 'week')}
           onChange={(newValue) => {
         setValue(newValue)
     }} />
