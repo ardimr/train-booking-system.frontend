@@ -23,14 +23,14 @@ const SearchTickets = () => {
             <QueryClientProvider client={queryQlient}>
               <div className={styles.originStationBox}>
                 <div className={styles.stationTitle}> Origin </div>
-                <SearchStations />
+                <SearchStations placeholder='origin station' />
               </div>
               <div style={{width:'100px'}}>
                 
               </div>
               <div className={styles.destinationStationBox}>
                 <div className={styles.stationTitle}> Destination </div>
-                <SearchStations />
+                <SearchStations placeholder='destination station' />
               </div>
             </QueryClientProvider>
         </div>
@@ -44,7 +44,16 @@ const SearchTickets = () => {
                 </div>
                 <div className={styles.departureDate} style={{padding:"10px 10px 10px 10px", alignSelf:"center"}}>
                   <div className={styles.stationTitle}>Passengers</div>
-                  <select placeholder='1-4 People' style={{height:"35px", width:"100px", padding:"8px 10px"}}> 
+                  <select 
+                    placeholder='1-4 People' 
+                    style={{
+                      height:"40px", 
+                      width:"100px", 
+                      padding:"8px 10px",
+                      background: "white",
+                      borderRadius: "5px",
+                      border: "1px solid #C5C5C5",
+                    }}> 
                     <option value={1}>1</option>
                     <option value={2}>2</option>
                     <option value={3}>3</option>

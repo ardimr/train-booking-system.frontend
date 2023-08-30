@@ -7,6 +7,8 @@ import { DevTool } from "@hookform/devtools";
 import {z} from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
 import { useRegistration, RegistrationData, registerUser } from '@/hooks/useRegister';
+import InputPassword from '../Input/InputPassword';
+import Input from '../Input/Input';
 
 interface IFormInput {
     fullName : string
@@ -26,6 +28,7 @@ const schema = z.object({
   path: ["confirmPassword"],
   message: "Password don't match",
 });
+
 const RegistrationForm = () => {
   
   const {register, handleSubmit, formState, control,  getValues, setValue, reset} = useForm<IFormInput>(
@@ -43,7 +46,7 @@ const RegistrationForm = () => {
 
   const {errors, dirtyFields, touchedFields, isDirty, isValid, isSubmitSuccessful} = formState
   
-  const {mutate: registerUser, isError, error} = useRegistration()
+  const {mutate: registerUser, isError, error, isSuccess} = useRegistration()
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     console.log(data)
@@ -58,7 +61,7 @@ const RegistrationForm = () => {
 
     registerUser(registrationData)
     
-    if (isSubmitSuccessful) {
+    if (isSubmitSuccessful && isSuccess) {
       reset()
     }
     
@@ -74,23 +77,23 @@ const RegistrationForm = () => {
         <h2 className={styles.header}>Registration Form</h2>
 
         <label className={styles.label} htmlFor='fullName'> Full Name</label>
-        <input className={styles.input} type='text' placeholder='Enter full name' {...register("fullName", {required: true})}/>
+        <Input  name="fullName" label="fullName"  type='text' placeholder='Enter full name' register={register}/>
         <p className={styles.error}> {errors.fullName?.message}</p>
         
         <label className={styles.label} htmlFor='username'>Username</label>
-        <input className={styles.input} type='text' placeholder='Enter username' {...register("username", {required: true})}/>
+        <Input  name="username" label="username"  type='text' placeholder='Enter username' register={register}/>
         <p className={styles.error} > {errors.username?.message}</p>
 
         <label className={styles.label} htmlFor='email'>Email</label>
-        <input className={styles.input} type='email' placeholder='email@email.com' {...register("email", {required: true})}/>
+        <Input  name="email" label="email"  type='email' placeholder='john.doe@mail.com' register={register}/>
         <p className={styles.error} > {errors.email?.message}</p>
 
         <label className={styles.label} htmlFor='password'>Password</label>
-        <input className={styles.input} type='password' placeholder='Enter password' {...register("password", {required: true})}/>
+        <InputPassword name='password' label='password' placeholder='Enter password' register={register}/>
         <p className={styles.error}> {errors.password?.message}</p>
 
         <label className={styles.label} htmlFor='password'>Password</label>
-        <input className={styles.input} type='password' placeholder='Confirm password' {...register("confirmPassword", {required: true})}/>
+        <InputPassword name='confirmPassword' label='confirmPassword' placeholder='Confirm password' register={register}/>
         <p className={styles.error}> {errors.confirmPassword?.message}</p>
 
         {error && <p className={styles.error}>{error.message}</p>}

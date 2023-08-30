@@ -48,7 +48,7 @@
 }
 
 .stationTitle {
-    color: #000;
+    color: rgba(3,18,26,1);
     /* font-family: Inter; */
     font-size: 16px;
     font-style: normal;
@@ -59,7 +59,7 @@
 
 .secondContainer {
     position: relative;
-    /* align-items: center;
+    /* align-items: center; 
     justify-content: center; */
     display: flex;
     flex-direction: row;

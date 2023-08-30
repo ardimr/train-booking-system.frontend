@@ -1,8 +1,16 @@
+"use client"
 import React from 'react'
 import styles from './styles.module.css'
 import PrimaryButton from '../Button/primary_button'
 import {BsArrowRightCircle} from 'react-icons/bs'
+import { useRouter } from 'next/navigation'
+
 const TravelCard = () => {
+  const router = useRouter()
+
+  const handleClick = () => {
+    router.push('/booking?travelId=1')
+  }
   return (
     <div className={styles.travelCard}>
         <div className={styles.container1}>
@@ -26,7 +34,7 @@ const TravelCard = () => {
                 <div style={{alignSelf:'center'}}>
                     <BsArrowRightCircle fontSize={20}  />
                 </div>
-                <div >
+                <div className={styles["subtext"]}>
                     5j 47m
                 </div>
             </div>
@@ -51,7 +59,7 @@ const TravelCard = () => {
                 Available
             </div>
             <div className={styles.selectButton} >
-                <PrimaryButton disabled={false} children='Select'/>
+                <PrimaryButton disabled={false} children='Select' onClick={handleClick}/>
             </div>
             
         </div>

@@ -1,10 +1,11 @@
 "use client"
 import React, { useState } from 'react'
 import styles from './styles.module.css'
-import Input from './Input'
+import Input from '../Input/Input'
 import CountryCode from '../CountryCode/CountryCode'
 import { CountryCodeModel } from '../CountryCode/CountryCode'
 import { useForm, SubmitHandler, Controller } from "react-hook-form"
+import PrimaryButton from '../Button/primary_button'
 
 
 interface IFormInput {
@@ -71,7 +72,7 @@ const BookingForm = () => {
         <form className={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
             <div className={styles.contactDetails} >
                 <div className={styles.fullName}>
-                    <div style={{padding: "5px 0"}}>
+                    <div className={styles["label"]}>
                         Full Name
                     </div>
                     <Input 
@@ -86,7 +87,7 @@ const BookingForm = () => {
                 
                 <div className={styles.phone}>
                     <div className={styles.countryCode}>
-                        <div style={{padding: "5px 0"}}>
+                        <div className={styles["label"]}>
                             Country Code
                         </div>
                         <CountryCode
@@ -96,7 +97,7 @@ const BookingForm = () => {
                         />
                     </div>
                     <div className={styles.phoneNumber}>
-                        <div style={{padding: "5px 0"}}>
+                        <div className={styles["label"]}>
                             Phone Number
                         </div>
                         <Input
@@ -110,7 +111,7 @@ const BookingForm = () => {
                     
                 </div>
                 <div className={styles.email}>
-                    <div style={{padding: "5px 0"}}>
+                    <div className={styles["label"]}>
                         Email
                     </div>
                     <Input
@@ -130,7 +131,7 @@ const BookingForm = () => {
                 <div className={styles.passengerDetails} key={index}>
                     <h2>Passenger {index+1}</h2>
                     <div className={styles.fullName}>
-                        <div style={{padding: "5px 0"}}>
+                        <div className={styles["label"]}>
                             Full Name
                         </div>
                         <Input 
@@ -141,24 +142,38 @@ const BookingForm = () => {
                             register={register}
                         />
                     </div>
-                    <div className={styles.identityNumber}>
-                        <div style={{padding: "5px 0"}}>
+                    <div style={{display:"flex",justifyContent:"space-between", width:"100%"}}>
+                      <div className={styles["identity-type"]}>
+                      <div className={styles["label"]}>
+                            Identity Type
+                        </div>
+                        <select className={styles["identity-type-dropdown"]}>
+                          <option value={"KTP"}>KTP</option>
+                          <option value={"Passport"}>Passport</option>
+                        </select>
+                      </div>
+                      <div className={styles["identity-number"]}>
+                        <div className={styles["label"]}>
                             Identity Number
                         </div>
                         <Input 
                             type='text' 
-                            placeholder='Enter your full name' 
+                            placeholder='Enter your identity number' 
                             label={`passengers.${index}.identity.number`}
                             name= {`passengers.${index}.identity.number`}
                             register={register}
                         />
+                      </div>
                     </div>
+                    
+                    
+                    
                 </div>
                 )
 
                 )
             }
-            <button type='submit' className={styles.submitButton}> Submit </button>
+            <PrimaryButton type='submit' style={{width:"50%", alignSelf:"center"}}>Submit</PrimaryButton>
         </form>
         
         
