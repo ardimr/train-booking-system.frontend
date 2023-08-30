@@ -26,7 +26,7 @@ const TravelCard = () => {
                 <div style={{alignSelf:'center'}}>
                     <BsArrowRightCircle fontSize={20}  />
                 </div>
-                <div >
+                <div className={styles["subtext"]}>
                     5j 47m
                 </div>
             </div>

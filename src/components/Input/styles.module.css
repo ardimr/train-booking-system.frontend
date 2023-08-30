@@ -1,21 +1,18 @@
-.inputContainer{
-    display: flex;
-    width: 100%;
-    height: 40px;
-    border-radius: 5px;
+.input {
+  /* height: 35px; */
+  border-radius: 5px;
+  border: 1px solid #C5C5C5;
+  padding: 8px 10px;
+  box-sizing: border-box;
+  margin-top: 5px;
+  font-size: 14px;
+/* margin-bottom: 5px; */
 }
 
-.inputInner:hover{
-    border: 2px solid #000000;
+.input:hover {
+  outline: 1px solid black;
 }
 
-.inputInner{
-    box-sizing: border-box;
-    border-radius: 5px;
-    border: 1px solid #929292;
-    width: 100%;
-    height: 100%;
-    padding-left: 20px;
-    padding-right: 20px;
-    font-size: medium;
+.input.input-large {
+  padding: 10px 14px;
 }

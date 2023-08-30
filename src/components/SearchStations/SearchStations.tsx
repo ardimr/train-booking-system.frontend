@@ -1,9 +1,9 @@
 import { useState, useRef } from "react"
-import { DataModel } from "../DropdownStations/Model"
+import { DataModel } from "./DropdownStations/Model"
 
 import React from 'react'
-import DropdownStations from "../DropdownStations/DropdownStations"
-import Input from "../Input/InputStation"
+import DropdownStations from "./DropdownStations/DropdownStations"
+import Input from "./DropdownStations/InputStation"
 import { useQuery } from "react-query";
 import styles from './styles.module.css'
 import { useOnClickOutside } from "usehooks-ts"
@@ -19,7 +19,11 @@ const fetchStations = async (input: string)=> {
     const stations = await res.json()
     return stations
 }
-const SearchStations = () => {
+
+type Props = {
+  placeholder:string
+}
+const SearchStations = ({placeholder}: Props) => {
   const [stationInput, setStation] = useState('')
   const [showSuggestions, setShowSuggestions] = useState(false)
   const ref = useRef(null)
@@ -59,7 +63,7 @@ const SearchStations = () => {
         onChange={handleNameChange}
         setShowSuggestions={setShowSuggestions}
         type='text'
-        placeholder='Search stations'
+        placeholder={placeholder}
         value={stationInput}
       />
       {showSuggestions &&  stations !=null && <DropdownStations data = {stations}   setSelectedStationName={setStation} setShowSuggestions={setShowSuggestions}/>}

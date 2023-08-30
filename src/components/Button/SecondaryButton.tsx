@@ -7,17 +7,17 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     disabled? : boolean;
   }
 
-const PrimaryButton: React.FC<Props> = ({
+const SecondaryButton: React.FC<Props> = ({
     children,
     disabled,
     onClick,
     ...Props
 }: Props) => {
   return (
-    <button className={styles.primaryButton} disabled={disabled} type='submit' onClick={onClick} {...Props}>
+    <button className={styles["secondary-button"]} disabled={disabled} type='submit' onClick={onClick} {...Props}>
         <div >{children}</div>
     </button>
   )
 }
 
-export default PrimaryButton
+export default SecondaryButton

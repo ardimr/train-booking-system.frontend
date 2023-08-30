@@ -6,6 +6,8 @@ import { useForm, SubmitHandler, FieldErrors } from 'react-hook-form'
 import {z} from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
 import { useLogin, loginUser, LoginData } from '@/hooks/useLogin'
+import PrimaryButton from '../Button/primary_button'
+import SecondaryButton from '../Button/SecondaryButton'
 
 interface IFormInput {
   username: string
@@ -55,12 +57,13 @@ const LoginForm = () => {
         <h2 className={styles.header}>Login</h2>
         
         <label className={styles.label} htmlFor='username'>Username</label>
-        <input  className={styles.input} type='text' placeholder='Enter username' {...register("username", {required: true})}/>
+        <Input name='username' type='text' placeholder='Enter username' register={register} label='username'/>
         
         <label className={styles.label} htmlFor='password'>Password</label>
-        <input className={styles["input"]}  type='password' placeholder='Enter password' {...register("password", {required: true})}/>
+        <Input name='password' label='password' type='password' placeholder='Enter password' register={register}/>
         
-        <button className={styles.submitButton} type='submit' disabled={!isDirty || !isValid}> Login </button>
+        <SecondaryButton style={{marginTop:"15px", fontSize:"14px"}} type='submit' children='Submit' disabled={!isDirty || !isValid}/>
+        {/* <button className={styles.submitButton} type='submit' disabled={!isDirty || !isValid}> Login </button> */}
     </form>
   )
 }

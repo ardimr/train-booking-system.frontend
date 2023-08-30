@@ -60,10 +60,10 @@
 }
 
 .text1 {
-    color: #000;
+    color: rgb(3, 18, 26);
     /* font-family: Roboto; */
-    font-size: 24px;
-    font-style: normal;
+    font-size: 18px;
+    /* font-style: normal; */
     font-weight: 600;
     line-height: normal;
 }
@@ -71,14 +71,14 @@
 .price {
     color: #3F9CF2;
     /* font-family: Roboto; */
-    font-size: 24px;
-    font-style: normal;
+    font-size: 18px;
+    /* font-style: normal; */
     font-weight: 700;
     line-height: normal;
 }
 
 .subtext {
-    color: #000;
+    color: rgb(104, 113, 118);
     /* font-family: Roboto; */
     font-size: 14px;
     font-style: normal;

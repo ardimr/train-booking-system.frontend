@@ -46,7 +46,7 @@ const CountryCode = (
       <div onClick={handleInputClick} className={styles.dropdownInput}>
         <div style={{position:"relative", display:"flex", width:"100%", height:"100%", alignItems:"center"}}>
           <ReactCountryFlag className={styles.countryFlag} countryCode={value.flagCode} svg />
-          <div>
+          <div style={{fontSize:"14px"}}>
             {value.dialCode}
           </div>
           <BiChevronDown className={styles.dropdownIcon}/>
