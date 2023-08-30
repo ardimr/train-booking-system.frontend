@@ -28,6 +28,7 @@ const schema = z.object({
   path: ["confirmPassword"],
   message: "Password don't match",
 });
+
 const RegistrationForm = () => {
   
   const {register, handleSubmit, formState, control,  getValues, setValue, reset} = useForm<IFormInput>(
@@ -45,7 +46,7 @@ const RegistrationForm = () => {
 
   const {errors, dirtyFields, touchedFields, isDirty, isValid, isSubmitSuccessful} = formState
   
-  const {mutate: registerUser, isError, error} = useRegistration()
+  const {mutate: registerUser, isError, error, isSuccess} = useRegistration()
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     console.log(data)
@@ -60,7 +61,7 @@ const RegistrationForm = () => {
 
     registerUser(registrationData)
     
-    if (isSubmitSuccessful) {
+    if (isSubmitSuccessful && isSuccess) {
       reset()
     }
     
