@@ -31,8 +31,8 @@ const InputPassword: React.FC<InputProps> = (
         autoComplete= "off"
       />
       {isShowPassword
-        ? <AiOutlineEyeInvisible fontSize={14} className={styles["password-icon"]} onClick={onClickHandler}/>
-        : <AiOutlineEye fontSize={14} className={styles["password-icon"]} onClick={onClickHandler} /> 
+        ? <AiOutlineEye fontSize={14} className={styles["password-icon"]} onClick={onClickHandler}/>
+        : <AiOutlineEyeInvisible fontSize={14} className={styles["password-icon"]} onClick={onClickHandler} /> 
       }
       
     </div>
