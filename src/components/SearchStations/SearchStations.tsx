@@ -42,6 +42,10 @@ const SearchStations = ({placeholder}: Props) => {
     // console.log(stationFilteredList)
   }
   
+  const handleOnClickStation = (station:string) => {
+    setSelectedStation(station)
+    setStationInput(station)
+  }
   const { data, isError, isLoading } = useQuery({
     queryKey : ['fetchStations', stationInput],
     queryFn: () => fetchStations(stationInput),
@@ -68,7 +72,7 @@ const SearchStations = ({placeholder}: Props) => {
         placeholder={placeholder}
         value={stationInput}
       />
-      {showSuggestions &&  stations !=null && <DropdownStations data = {stations}   setSelectedStationName={setSelectedStation} setShowSuggestions={setShowSuggestions}/>}
+      {showSuggestions &&  stations !=null && <DropdownStations data = {stations}   onStationClick={handleOnClickStation} setShowSuggestions={setShowSuggestions}/>}
     </div>
   )
 }

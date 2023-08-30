@@ -8,13 +8,13 @@ import { DataModel } from './Model'
 
 interface Props {
   data : DataModel[],
-  setSelectedStationName: React.Dispatch<React.SetStateAction<string>>,
+  onStationClick: (station:string) => void,
   setShowSuggestions: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const DropdownStations: React.FC<Props> = ({
   data ,
-  setSelectedStationName,
+  onStationClick,
   setShowSuggestions
 }) =>{
   const onBlurHandler = (e: React.FocusEvent<HTMLDivElement> ) => {
@@ -28,7 +28,7 @@ const DropdownStations: React.FC<Props> = ({
     <div className={styles.dropDownList} onBlur={onBlurHandler}>
       {data.map((data, index) => { 
         return (
-          <StationItem key={index} data={data} setSelectedStationName={setSelectedStationName} setShowSuggestions={setShowSuggestions}/>
+          <StationItem key={index} data={data} onStationClick={onStationClick} setShowSuggestions={setShowSuggestions}/>
         )
       })}
     </div>

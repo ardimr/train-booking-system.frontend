@@ -1,41 +1,47 @@
-"use client"
 import React from 'react'
 import styles from './styles.module.css'
 import PrimaryButton from '../Button/primary_button'
 import {BsArrowRightCircle} from 'react-icons/bs'
-import { useRouter } from 'next/navigation'
+import { TravelData } from '@/models/travel'
 
-const TravelCard = () => {
-  const router = useRouter()
+interface Props {
+    travelData: TravelData
+}
 
-  const handleClick = () => {
-    router.push('/booking?travelId=1')
-  }
+const TravelCard = ({travelData}: Props) => {
+    const departure_schedule = new Date(travelData.departure_schedule)
+    const arrival_schedule = new Date(travelData.arrival_schedule)
+    const IDR = Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'IDR',
+    });
+    
   return (
     <div className={styles.travelCard}>
         <div className={styles.container1}>
             <div className={styles.text1}>
-                Ciremai (144)
+                {travelData.train_name} ({travelData.travel_code})
+                {/* Ciremai (144) */}
             </div>
             <div className={styles.subtext}>
-                Economy
+                {travelData.wagon_class.wagon_class_name}
             </div>
         </div>
         <div className={styles.container2}>
             <div className={styles.subContainer1}>
                 <div className={styles.text1}>
-                    16:50
+                {String(departure_schedule.getHours()).padStart(2,'0')}:{String(departure_schedule.getMinutes()).padStart(2,'0')}
                 </div>
                 <div className={styles.subtext}>
-                    Bandung (BD)
+                    {travelData.departure_station.name} ({travelData.departure_station.code})
                 </div>
             </div>
             <div className={styles.subContainer2}>
                 <div style={{alignSelf:'center'}}>
                     <BsArrowRightCircle fontSize={20}  />
                 </div>
-                <div className={styles["subtext"]}>
-                    5j 47m
+                <div >
+                    {travelData.duration.hour}j {travelData.duration.minute}m
                 </div>
             </div>
             {/* <div className={styles.subContainer2}>
@@ -43,23 +49,23 @@ const TravelCard = () => {
             </div> */}
             <div className={styles.subContainer1}>
                 <div className={styles.text1}>
-                    16:50
+                    {String(arrival_schedule.getHours()).padStart(2,'0')}:{String(arrival_schedule.getMinutes()).padStart(2,'0')}
                 </div>
                 <div className={styles.subtext}>
-                    Bandung (BD)
+                    {travelData.destination_station.name} ({travelData.destination_station.code})
                 </div>
             </div>
             
         </div>
         <div className={styles.container1}>
             <div className={styles.price}>
-                Rp 225.000
+                {IDR.format(travelData.cost.amount)}
             </div>
             <div className={styles.subtext}>
                 Available
             </div>
             <div className={styles.selectButton} >
-                <PrimaryButton disabled={false} children='Select' onClick={handleClick}/>
+                <PrimaryButton disabled={false} children='Select'/>
             </div>
             
         </div>

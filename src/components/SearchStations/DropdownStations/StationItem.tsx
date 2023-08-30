@@ -4,19 +4,19 @@ import { DataModel } from './Model'
 
 interface DropdownItemProps {
   data : DataModel,
-  setSelectedStationName: React.Dispatch<React.SetStateAction<string>>,
+  onStationClick: (station:string) => void,
   setShowSuggestions: React.Dispatch<React.SetStateAction<boolean>>
 }
 const StationItem = (
   {
     data,
-    setSelectedStationName,
+    onStationClick,
     setShowSuggestions,
   } : DropdownItemProps
 ) => {
 
   const onClickHandler = (event : React.MouseEvent<HTMLDivElement>) => {
-    setSelectedStationName(data.title)
+    onStationClick(data.title)
     setShowSuggestions(false)
   }
   const onBlurHandler = () => {
