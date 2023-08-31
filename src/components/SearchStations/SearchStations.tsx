@@ -22,10 +22,13 @@ const fetchStations = async (input: string)=> {
 
 type Props = {
   placeholder:string
+  selectedStation: string
+  setSelectedStation: React.Dispatch<React.SetStateAction<string>>
+
 }
-const SearchStations = ({placeholder}: Props) => {
+const SearchStations = ({placeholder, selectedStation, setSelectedStation }: Props) => {
   const [stationInput, setStationInput] = useState('')
-  const [selectedStation, setSelectedStation] = useState('')
+  // const [selectedStation, setSelectedStation] = useState('')
   const [showSuggestions, setShowSuggestions] = useState(false)
   const ref = useRef(null)
 
