@@ -6,10 +6,10 @@ import { SxProps } from '@mui/material';
 
 interface props {
     value:Dayjs | null
-    setValue:React.Dispatch<React.SetStateAction<Dayjs | null>>
+    onChange: (...event: any[]) => void
 } 
 const CustomDatePicker: React.FC<props> = (
-    { value, setValue }
+    { value, onChange }
 ) => {
     // const onChangeHandler = 
   const dateSx: SxProps = {
@@ -31,7 +31,7 @@ const CustomDatePicker: React.FC<props> = (
           minDate={dayjs()}
           maxDate={dayjs().add(1, 'week')}
           onChange={(newValue) => {
-        setValue(newValue)
+            onChange(newValue)
     }} />
     </LocalizationProvider>
   )

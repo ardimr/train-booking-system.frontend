@@ -1,57 +1,63 @@
 import TravelCard from "@/components/TravelCard/TravelCard"
 import { useTravels } from "@/hooks/useTravels"
 import { TravelData } from "@/models/travel"
-import { QueryClient, QueryClientProvider } from "react-query"
+import { QueryClient, QueryClientProvider, useQueryClient } from "react-query"
 import SearchTicketForm from "./SearchTicketForm"
 import dayjs, { Dayjs } from "dayjs"
-import { SubmitHandler, useForm } from "react-hook-form"
+import { SubmitHandler, useForm, useWatch } from "react-hook-form"
 import { useState } from "react"
+import { fetchTravels } from "@/api/fetchTravels"
+import { Station } from "@/models/station"
+
 
 export interface SearchFormInput {
-  departureStation: string
-  destinationStation: string
+  departureStation: Station
+  destinationStation: Station
   selectedDate: Dayjs
   totalPassengers: number
 }
 
 const SearchTickets = () => {
-  const {data} = useTravels()
-  const [departureStation, setDepartureStation] = useState<string>("")
-  const [destinationStation, setDestinationStation] = useState<string>("")
-  const [selectedDate, setSelectedDate] = useState<Dayjs|null>(dayjs())
-  const [totalPassengers, setTotalPassengers] = useState<number>(1)
-
-  const [searchForm, setSearchForm] = useState<SearchFormInput>(
+  const {control, handleSubmit, getValues} = useForm<SearchFormInput>(
     {
-      departureStation:"",
-      destinationStation: "",
-      selectedDate: dayjs(),
-      totalPassengers:1
+      defaultValues: {
+        departureStation: {
+          name:"",
+          code:""
+        },
+        destinationStation: {
+          name:"",
+          code:""
+        },
+        selectedDate: dayjs(),
+        totalPassengers: 1
+      },
     }
   )
   
-  const handleOnSubmit = () => {
-    console.log(departureStation, destinationStation, selectedDate?.format('DD/MM/YYYY'),totalPassengers)
+  const queryClient = useQueryClient()
+  
+  const [search, setSearch] = useState<SearchFormInput>(getValues)
+  const {data:travelData} = useTravels(search)
+  
+  const onSubmit: SubmitHandler<SearchFormInput> = async (form) => {
+    console.log(form)
+    setSearch(form)
   }
+
   // console.log(data)
   return (
     <div style={{display: "flex", flexDirection:"column", alignItems:"center"}}>
       
       <SearchTicketForm 
-        departureStation={departureStation}
-        setDepartureStation={setDepartureStation}
-        destinationStation={destinationStation}
-        setDestinationStation={setDestinationStation}
-        selectedDate={selectedDate}
-        setSelectedDate={setSelectedDate}
-        totalPassengers={totalPassengers}
-        setTotalPassengers={setTotalPassengers}
-        handleOnSubmit={handleOnSubmit}
+        control={control}
+        onSubmit={onSubmit}
+        handleSubmit = {handleSubmit}
       />
       
       <div style={{height:'35px'}} />
       
-      {data?.map((travel:TravelData, index:number) =>
+      {travelData?.map((travel:TravelData, index:number) =>
         <TravelCard key={index} travelData={travel} />
       )}
     </div>

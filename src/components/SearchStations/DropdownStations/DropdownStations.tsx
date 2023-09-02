@@ -4,11 +4,11 @@ import React from 'react'
 import styles from './styles.module.css'
 
 import StationItem from './StationItem'
-import { DataModel } from './Model'
+import { Station } from '@/models/station'
 
 interface Props {
-  data : DataModel[],
-  onStationClick: (station:string) => void,
+  data : Station[],
+  onStationClick: (station:Station) => void,
   setShowSuggestions: React.Dispatch<React.SetStateAction<boolean>>
 }
 
@@ -17,22 +17,14 @@ const DropdownStations: React.FC<Props> = ({
   onStationClick,
   setShowSuggestions
 }) =>{
-  const onBlurHandler = (e: React.FocusEvent<HTMLDivElement> ) => {
-    console.log("Not focus")
-    // if (stationInput === '') {
-        // setShowSuggestions(false)
-
-    // }
-  }
   return (
-    <div className={styles.dropDownList} onBlur={onBlurHandler}>
+    <div className={styles.dropDownList} >
       {data.map((data, index) => { 
         return (
           <StationItem key={index} data={data} onStationClick={onStationClick} setShowSuggestions={setShowSuggestions}/>
         )
       })}
     </div>
-    
   )
 }
 

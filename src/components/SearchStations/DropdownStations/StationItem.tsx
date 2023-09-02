@@ -1,12 +1,13 @@
 import React from 'react'
 import styles from './styles.module.css'
-import { DataModel } from './Model'
+import { Station } from '@/models/station'
 
 interface DropdownItemProps {
-  data : DataModel,
-  onStationClick: (station:string) => void,
+  data : Station,
+  onStationClick: (station:Station) => void,
   setShowSuggestions: React.Dispatch<React.SetStateAction<boolean>>
 }
+
 const StationItem = (
   {
     data,
@@ -16,21 +17,21 @@ const StationItem = (
 ) => {
 
   const onClickHandler = (event : React.MouseEvent<HTMLDivElement>) => {
-    onStationClick(data.title)
+    const station:Station = {
+      name:data.name,
+      code: data.code,
+      city: data.city,
+      label: data.label
+    }
+    onStationClick(data)
     setShowSuggestions(false)
   }
-  const onBlurHandler = () => {
-    console.log("Not focus")
-    // if (stationInput === '') {
-    //     setShowSuggestions(false)
 
-    // }
-  }
   return (
-    <div className={(styles.dropdownItem)}  onClick={onClickHandler} onBlur={onBlurHandler}> 
+    <div className={(styles.dropdownItem)}  onClick={onClickHandler} > 
       <div>
-        <div> {data.title} </div>
-        <p> {data.caption}</p>
+        <div> {data.city} </div>
+        <p> {data.label}</p>
       </div>
     </div>
   )
