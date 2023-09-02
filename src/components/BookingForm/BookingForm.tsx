@@ -5,7 +5,7 @@ import Input from '../Input/Input'
 import CountryCode from '../CountryCode/CountryCode'
 import { CountryCodeModel } from '../CountryCode/CountryCode'
 import { useForm, SubmitHandler, Controller } from "react-hook-form"
-import PrimaryButton from '../Button/primary_button'
+import PrimaryButton from '../Button/PrimaryButton'
 
 
 interface IFormInput {

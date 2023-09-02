@@ -5,10 +5,10 @@ import Input from '../Input/Input'
 import { useForm, SubmitHandler, FieldErrors } from 'react-hook-form'
 import {z} from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
-import { useLogin, loginUser, LoginData } from '@/hooks/useLogin'
-import PrimaryButton from '../Button/primary_button'
+import { useLogin } from '@/hooks/useLogin'
 import SecondaryButton from '../Button/SecondaryButton'
 import InputPassword from '../Input/InputPassword'
+import { LoginData } from '@/models/login'
 
 interface IFormInput {
   username: string
@@ -51,8 +51,6 @@ const LoginForm = () => {
       reset()
     }
   }
-
-  
 
   return (
     <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)} noValidate>

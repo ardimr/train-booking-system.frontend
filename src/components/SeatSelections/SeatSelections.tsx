@@ -8,7 +8,7 @@ import SeatHeader from './SeatHeader'
 import Passenger from './Passenger'
 import SeatLegends from './SeatLegends'
 import Wagons from './Wagons'
-import PrimaryButton from '../Button/primary_button'
+import PrimaryButton from '../Button/PrimaryButton'
 import SeatsLayout from './SeatsLayout'
 import { useAvailableSeats } from '@/hooks/useAvailableSeats'
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './styles.module.css'
-import PrimaryButton from '../Button/primary_button'
+import PrimaryButton from '../Button/PrimaryButton'
 import {BsArrowRightCircle} from 'react-icons/bs'
 import { TravelData } from '@/models/travel'
 

@@ -5,7 +5,7 @@ import styles from './styles.module.css'
 import SearchStations from '../SearchStations/SearchStations'
 import { QueryClient, QueryClientProvider, UseQueryResult } from 'react-query'
 import CustomDatePicker from '../DatePicker/DatePicker'
-import PrimaryButton from '../Button/primary_button'
+import PrimaryButton from '../Button/PrimaryButton'
 import dayjs, { Dayjs } from 'dayjs'
 import DatePicker from 'react-date-picker'
 import 'react-date-picker/dist/DatePicker.css';
