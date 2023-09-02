@@ -6,8 +6,8 @@ import SearchTicketForm from "./SearchTicketForm"
 import dayjs, { Dayjs } from "dayjs"
 import { SubmitHandler, useForm, useWatch } from "react-hook-form"
 import { useState } from "react"
-import { fetchTravels } from "@/api/fetchTravels"
 import { Station } from "@/models/station"
+import { useRouter } from "next/navigation"
 
 
 export interface SearchFormInput {
@@ -35,7 +35,6 @@ const SearchTickets = () => {
     }
   )
   
-  const queryClient = useQueryClient()
   
   const [search, setSearch] = useState<SearchFormInput>(getValues)
   const {data:travelData} = useTravels(search)
@@ -43,6 +42,14 @@ const SearchTickets = () => {
   const onSubmit: SubmitHandler<SearchFormInput> = async (form) => {
     console.log(form)
     setSearch(form)
+  }
+
+  const router = useRouter()
+
+
+  const handleOnSelect = (travelCode: number) => {
+    router.push(`/booking?travel-code=${travelCode}&total-passengers=${search.totalPassengers}`)
+
   }
 
   // console.log(data)
@@ -58,7 +65,7 @@ const SearchTickets = () => {
       <div style={{height:'35px'}} />
       
       {travelData?.map((travel:TravelData, index:number) =>
-        <TravelCard key={index} travelData={travel} />
+        <TravelCard key={index} travelData={travel} onSelect={handleOnSelect}/>
       )}
     </div>
   )
