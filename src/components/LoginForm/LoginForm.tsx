@@ -9,8 +9,9 @@ import { useLogin } from '@/hooks/useLogin'
 import SecondaryButton from '../Button/SecondaryButton'
 import InputPassword from '../Input/InputPassword'
 import { LoginData } from '@/models/login'
+import { error } from 'console'
 
-interface IFormInput {
+export interface IFormInput {
   username: string
   password: string
 }
@@ -21,7 +22,7 @@ const schema = z.object({
 })
 
 const LoginForm = () => {
-  const {register, handleSubmit, formState, getValues, setValue, reset} = useForm<IFormInput>(
+  const {register, handleSubmit, formState, getValues, setValue, reset, setError,} = useForm<IFormInput>(
     {
         defaultValues: {
             username: "",
@@ -32,7 +33,7 @@ const LoginForm = () => {
   )
   const {errors, dirtyFields, touchedFields, isDirty, isValid, isSubmitSuccessful} = formState
  
-  const {mutate:loginUser, isError, data} = useLogin()
+  const {mutate:loginUser, isError, data, error, } = useLogin(reset)
   
   const onSubmit: SubmitHandler<IFormInput> = async (formData) => {
     console.log(formData)
@@ -47,9 +48,6 @@ const LoginForm = () => {
 
     console.log(data?.data)
 
-    if (isSubmitSuccessful) {
-      reset()
-    }
   }
 
   return (
@@ -62,8 +60,9 @@ const LoginForm = () => {
         <label className={styles.label} htmlFor='password'>Password</label>
         <InputPassword name='password' label='password' placeholder='Enter password' register={register}/>
         
+        {error?.message && <div className={styles["error"]} style={{alignSelf:"center", margin:"5px 0px 0px 0px"}}>{error.message}</div>}
         <SecondaryButton style={{marginTop:"15px", fontSize:"14px"}} type='submit' children='Submit' disabled={!isDirty || !isValid}/>
-        {/* <button className={styles.submitButton} type='submit' disabled={!isDirty || !isValid}> Login </button> */}
+
     </form>
   )
 }
