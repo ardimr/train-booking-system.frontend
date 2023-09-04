@@ -1,8 +1,10 @@
 import { useMutation } from "react-query";
 import { AxiosError } from 'axios'
 import { registerUser } from "@/api/registration";
+import { FieldValues, UseFormReset } from "react-hook-form";
+import { IFormInput } from "@/components/RegistrationForm/RegistrationForm";
 
-export const useRegistration = () => {
+export const useRegistration = (reset: UseFormReset<IFormInput>) => {
   return useMutation(registerUser,
       {
         onError: (error: AxiosError) => {
@@ -10,6 +12,9 @@ export const useRegistration = () => {
           error.message = "Failed to register user"
           // props?.onErrorCallback?.(error)          
         },
+        onSuccess: () => {
+          reset()
+        }
       }
     )
 }

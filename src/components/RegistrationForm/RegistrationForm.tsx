@@ -6,11 +6,12 @@ import styles from './styles.module.css'
 import { DevTool } from "@hookform/devtools";
 import {z} from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
-import { useRegistration, RegistrationData, registerUser } from '@/hooks/useRegister';
+import { useRegistration } from '@/hooks/useRegister';
 import InputPassword from '../Input/InputPassword';
 import Input from '../Input/Input';
+import { RegistrationData } from '@/models/registration';
 
-interface IFormInput {
+export interface IFormInput {
     fullName : string
     username: string
     email: string
@@ -46,7 +47,7 @@ const RegistrationForm = () => {
 
   const {errors, dirtyFields, touchedFields, isDirty, isValid, isSubmitSuccessful} = formState
   
-  const {mutate: registerUser, isError, error, isSuccess} = useRegistration()
+  const {mutate: registerUser, isError, error, isSuccess} = useRegistration(reset)
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     console.log(data)
