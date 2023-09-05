@@ -40,7 +40,7 @@ const SearchTickets = () => {
   const {data:travelData} = useTravels(search)
   
   const onSubmit: SubmitHandler<SearchFormInput> = async (form) => {
-    console.log(form)
+    // console.log(form.selectedDate.format('YYYY/MM/DD'))
     setSearch(form)
   }
 
