@@ -35,7 +35,7 @@ const options: CountryCodeModel[] = [
 const BookingForm = () => {
   const params = useSearchParams()
   const totalPassengers = params.get("total-passengers")
-
+  
   const [countryCode, setCountryCode] = useState<CountryCodeModel>({ flagCode: "ID", label: "Indonesia (+62)", dialCode: "+62" })
   const { register, handleSubmit, getValues, setValue } = useForm<IFormInput>({
     defaultValues: {
@@ -170,7 +170,10 @@ const BookingForm = () => {
 
           )
         }
-        <PrimaryButton type='submit' style={{ width: "50%", alignSelf: "center" }}>Submit</PrimaryButton>
+        <div style={{display:"flex", flexDirection:"row", width:"100%", justifyContent:"space-around"}}>
+          <PrimaryButton type='button' style={{ width: "300px", alignSelf: "center" }}>Select Seats</PrimaryButton>
+          <PrimaryButton type='submit' style={{ width: "300px", alignSelf: "center" }}>Submit</PrimaryButton>
+        </div>
       </form>
 
 
