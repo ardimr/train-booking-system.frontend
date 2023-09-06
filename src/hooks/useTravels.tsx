@@ -1,4 +1,4 @@
-import { fetchTravels } from "@/api/travels"
+import { fetchTravelById, fetchTravels } from "@/api/travels"
 import { SearchFormInput } from "@/components/SearchTickets/SearchTickets"
 import { useQuery, useQueryClient } from "react-query"
 
@@ -11,10 +11,17 @@ export const useTravels = (form:SearchFormInput) => {
     refetchOnWindowFocus: false,
 
   })
-    
 }
 
-
+export const useTravelById = (travelId:number) => {
+  return useQuery({
+    queryKey: ['travels', travelId],
+    queryFn: () => fetchTravelById(travelId),
+    enabled: true,
+    refetchOnWindowFocus: false,
+  })
+    
+}
 
 // export const useTravels = () => {
 //   return useQuery(

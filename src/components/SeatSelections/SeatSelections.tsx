@@ -12,6 +12,9 @@ import PrimaryButton from '../Button/PrimaryButton'
 import SeatsLayout from './SeatsLayout'
 import { useAvailableSeats } from '@/hooks/useAvailableSeats'
 import { useSearchParams } from 'next/navigation'
+import { useTravelById } from '@/hooks/useTravels'
+import { TravelInfo } from '@/models/travel'
+import dayjs from 'dayjs'
 
 
 const SeatSelections = () => {
@@ -24,6 +27,8 @@ const SeatSelections = () => {
 
   const [passengerSeats, setpassengerSeats] = useState<PassengerSeat[]>(initialPassengerSeats)
   const [activePassenger, setActivePassenger] = useState<number>(1)
+
+  const {data:dataTravelInfo, isLoading:isLoadingTravelInfo} = useTravelById(travelId? +travelId : 0)
 
   const intitalActiveWagon = () : WagonSelector=>  {
     if (isLoading || data==undefined) {
@@ -60,13 +65,41 @@ const SeatSelections = () => {
     console.log(passengerSeats)
   }
 
-  const layoutIndex:number = data?.findIndex((wagon:any) => {return wagon.wagon_number === activeWagon?.wagon_number})
+  const travelInfo: TravelInfo =  {
+    
+      travelId: dataTravelInfo?.travel_id,
+      travelCode: dataTravelInfo?.travel_code,
+      departureSchedule: dayjs(dataTravelInfo?.departure_schedule),
+      departureStation: {
+        name: dataTravelInfo?.departure_station.name,
+        code: dataTravelInfo?.departure_station.code,
+        cityCode: dataTravelInfo?.departure_station.city_code,
+      },
+      destinationStation: {
+        name: dataTravelInfo?.destination_station.name,
+        code: dataTravelInfo?.destination_station.code,
+        cityCode: dataTravelInfo?.destination_station.city_code,
+      },
+      trainName: dataTravelInfo?.train_name
 
+  }
+
+  console.log(travelInfo)
+
+  const layoutIndex:number = data?.findIndex((wagon:any) => {return wagon.wagon_number === activeWagon?.wagon_number})
   return (
     <div className={styles["seats-selection"]}>
       <div className={styles["travel-info-wrapper"]}>
-        <div className={styles["travel-info-top"]}>Tegal (Tegal) → Bandung (Bandung)</div>
-        <div className={styles["travel-info-bottom"]}>Ciremai (144) Executive | Sun, 20 Ags 2023 00:35</div>
+        {isLoadingTravelInfo
+          ? (
+            <div>Loading..</div>
+          )
+          :  <>
+              <div className={styles["travel-info-top"]}>{travelInfo.departureStation.name} ({travelInfo.departureStation.cityCode}) → {travelInfo.destinationStation.name} ({travelInfo.destinationStation.cityCode})</div>
+              <div className={styles["travel-info-bottom"]}>{travelInfo.trainName} ({travelInfo.travelCode}) {params.get("wagon-class")} | {travelInfo.departureSchedule.format('ddd, DD MMM YYYY HH:mm')}</div>
+            </>
+        }
+        
       </div>
       <div className={styles["passengers-seats-wrapper"]}>
         <div className={styles["passengers-container"]}>

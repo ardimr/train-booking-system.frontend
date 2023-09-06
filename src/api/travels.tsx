@@ -6,3 +6,8 @@ export const fetchTravels = async (form: SearchFormInput) => {
   const {data} = await axios.get(`http://localhost:8080/api/v1/travels?departure_station_code=${form.departureStation.code}&destination_station_code=${form.destinationStation.code}&departure_date=${selectedDate}`)
   return data
 }
+
+export const fetchTravelById = async (travelId:number) => {
+  const {data} = await axios.get(`http://localhost:8080/api/v1/travels/${travelId}`)
+  return data
+}

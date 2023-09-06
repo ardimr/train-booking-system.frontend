@@ -1,4 +1,22 @@
+import dayjs, { Dayjs } from "dayjs"
 
+export type TravelInfo = {
+  travelId: number
+  travelCode:number
+  trainName: string
+  departureSchedule: Dayjs
+  departureStation: {
+    code: string
+    name: string
+    cityCode: string
+  }
+  destinationStation: {
+    code: string
+    name: string
+    cityCode: string
+  }
+
+}
 export type TravelData = {
   travel_id: number
   travel_code:number
