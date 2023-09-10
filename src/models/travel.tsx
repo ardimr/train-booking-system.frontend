@@ -4,6 +4,7 @@ export type TravelInfo = {
   travelId: number
   travelCode:number
   trainName: string
+  wagonClass: string
   departureSchedule: Dayjs
   departureStation: {
     code: string

@@ -7,7 +7,7 @@ export const fetchTravels = async (form: SearchFormInput) => {
   return data
 }
 
-export const fetchTravelById = async (travelId:number) => {
-  const {data} = await axios.get(`http://localhost:8080/api/v1/travels/${travelId}`)
+export const fetchTravelById = async (travelId:number, wagonClass:string) => {
+  const {data} = await axios.get(`http://localhost:8080/api/v1/travels/${travelId}?wagon_class=${wagonClass}`)
   return data
 }

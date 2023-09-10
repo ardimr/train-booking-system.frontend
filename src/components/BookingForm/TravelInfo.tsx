@@ -6,15 +6,23 @@ import { LiaTrainSolid } from 'react-icons/lia'
 import { useSearchParams } from 'next/navigation'
 import { useTravelById } from '@/hooks/useTravels'
 import dayjs from 'dayjs'
+import { IDR } from '@/utils/currency'
 
 const TravelInfo = () => {
   const params = useSearchParams()
   const totalPassengers = params.get("total-passengers")
   const travelId = params.get("travel-id") ? +params.get("travel-id")! : 0
+  const wagonClass = params.get("wagon-class") ? params.get("wagon-class")! : ""
 
-  const { data, isLoading, isError } = useTravelById(travelId)
+  const { data, isLoading, isError } = useTravelById(travelId, wagonClass)
   const departureDate = dayjs(data?.departure_schedule)
   const arrivalDate = dayjs(data?.arrival_schedule)
+  
+
+
+  const serviceFee: number = 5000
+  const fareAmount:number = +totalPassengers! * data?.fare.amount
+  const totalFare:number = fareAmount + serviceFee
   return (
     <div className={styles['travel-info-card']}>
       {isError
@@ -28,7 +36,7 @@ const TravelInfo = () => {
               <LiaTrainSolid fontSize={28} />
               <div style={{ display: "flex", flexDirection: "column", paddingLeft: "5px" }}>
                 <div style={{ fontSize: "14px", fontWeight: "bold" }}>{data?.departure_station.name}</div>
-                <div style={{ fontSize: "12px" }}>Executive</div>
+                <div style={{ fontSize: "12px" }}>{data?.wagon_class.wagon_class_name}</div>
               </div>
             </div>
             <div style={{ display: "flex", alignItems: "center" }}>
@@ -52,7 +60,7 @@ const TravelInfo = () => {
             <div className={styles['container-cross']}>
               <BsArrowRightCircle style={{ alignSelf: "center" }} />
               <div style={{ fontSize: "12px" }}>
-                5j37m
+                {data?.duration.hour}j{data?.duration.minute}m
               </div>
             </div>
             <div className={styles['container-cross']}>
@@ -73,7 +81,7 @@ const TravelInfo = () => {
               Adult ({totalPassengers}x)
             </div>
             <div>
-              Rp190.000
+              {IDR.format(fareAmount)}
             </div>
           </div>
           <div className={styles['container-main']} style={{ padding: "0px 16px 12px 16px" }}>
@@ -81,7 +89,7 @@ const TravelInfo = () => {
               Service Fee
             </div>
             <div>
-              Rp5.000
+              {IDR.format(serviceFee)}
             </div>
           </div>
           <Divider />
@@ -90,7 +98,7 @@ const TravelInfo = () => {
               Total
             </div>
             <div style={{ fontSize: '20px', fontWeight: "600", color: "#43A1FE" }}>
-              Rp195.000
+              {IDR.format(totalFare)}
             </div>
           </div>
         </>

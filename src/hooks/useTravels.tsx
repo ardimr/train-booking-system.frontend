@@ -13,10 +13,10 @@ export const useTravels = (form:SearchFormInput) => {
   })
 }
 
-export const useTravelById = (travelId:number) => {
+export const useTravelById = (travelId:number, wagonClass: string) => {
   return useQuery({
-    queryKey: ['travels', travelId],
-    queryFn: () => fetchTravelById(travelId),
+    queryKey: ['travels', travelId, wagonClass],
+    queryFn: () => fetchTravelById(travelId, wagonClass),
     enabled: true,
     refetchOnWindowFocus: false,
   })
