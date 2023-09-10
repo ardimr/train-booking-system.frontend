@@ -43,8 +43,8 @@ const SeatSelections = (
   const [passengerSeats, setpassengerSeats] = useState<PassengerData[]>(initialPassengerSeats)
   const [activePassenger, setActivePassenger] = useState<number>(1)
 
-  console.log(passengerSeats)
-  const {data:dataTravelInfo, isLoading:isLoadingTravelInfo} = useTravelById(travelId? +travelId : 0)
+  // console.log(passengerSeats)
+  const {data:dataTravelInfo, isLoading:isLoadingTravelInfo} = useTravelById(travelId? +travelId : 0, "EKS")
 
   const intitalActiveWagon = () : WagonSelector=>  {
     if (isLoading || data==undefined) {
@@ -88,6 +88,7 @@ const SeatSelections = (
     
       travelId: dataTravelInfo?.travel_id,
       travelCode: dataTravelInfo?.travel_code,
+      wagonClass: dataTravelInfo?.wagon_class.wagon_class_name,
       departureSchedule: dayjs(dataTravelInfo?.departure_schedule),
       departureStation: {
         name: dataTravelInfo?.departure_station.name,
@@ -103,7 +104,6 @@ const SeatSelections = (
 
   }
 
-
   const layoutIndex:number = data?.findIndex((wagon:any) => {return wagon.wagon_number === activeWagon?.wagon_number})
   
   const ref = useRef(null)
@@ -117,7 +117,7 @@ const SeatSelections = (
           )
           :  <>
               <div className={styles["travel-info-top"]}>{travelInfo.departureStation.name} ({travelInfo.departureStation.cityCode}) → {travelInfo.destinationStation.name} ({travelInfo.destinationStation.cityCode})</div>
-              <div className={styles["travel-info-bottom"]}>{travelInfo.trainName} ({travelInfo.travelCode}) {params.get("wagon-class")} | {travelInfo.departureSchedule.format('ddd, DD MMM YYYY HH:mm')}</div>
+              <div className={styles["travel-info-bottom"]}>{travelInfo.trainName} ({travelInfo.travelCode}) {travelInfo.wagonClass} | {travelInfo.departureSchedule.format('ddd, DD MMM YYYY HH:mm')}</div>
             </>
         }
         
