@@ -23,21 +23,24 @@ export const passengers:PassengerData[] = [
 export type PassengerSeat = {
   passengerNumber: number
   passengerData: PassengerData
-  seat: RowElement | null
+  seat: {
+    seatId : number | null
+    setLabel : string
+  }
 }
 
-export const initialPassengerSeats: PassengerSeat[] = [
-    {
-        passengerNumber:1,
-        passengerData: {name:"Rizky Ardi Maulana"},
-        seat: null
-    },
-    {
-        passengerNumber:2,
-        passengerData: {name:"Shiva Veronica Aulia"},
-        seat: null
-    }
-]
+// export const initialPassengerSeats: PassengerSeat[] = [
+//     {
+//         passengerNumber:1,
+//         passengerData: {name:"Rizky Ardi Maulana"},
+//         seat: null
+//     },
+//     {
+//         passengerNumber:2,
+//         passengerData: {name:"Shiva Veronica Aulia"},
+//         seat: null
+//     }
+// ]
 
 export const seatRows:SeatRowData[] = [
     {

@@ -2,6 +2,7 @@ import React from 'react'
 import Seat from './Seat'
 import styles from './styles.module.css'
 import { PassengerSeat, RowElement } from './data'
+import { PassengerData } from '@/models/passenger'
 
 
 
@@ -9,7 +10,7 @@ interface props {
     rowElements: RowElement[]
     rowIndex: number
     handleSelectSeats: (seat: RowElement, activePassenger:number) => void
-    activeSeats: PassengerSeat[]
+    activeSeats: PassengerData[]
     activePassenger: number
 }
 

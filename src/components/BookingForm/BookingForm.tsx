@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import styles from './styles.module.css'
 import Input from '../Input/Input'
 import CountryCode from '../CountryCode/CountryCode'
@@ -8,7 +8,10 @@ import { useForm, SubmitHandler, Controller } from "react-hook-form"
 import PrimaryButton from '../Button/PrimaryButton'
 import { useSearchParams } from 'next/navigation'
 import { passengers } from '../SeatSelections/data'
-import { Passenger } from '@/models/passenger'
+import { PassengerData } from '@/models/passenger'
+import SeatSelections from '../SeatSelections/SeatSelections'
+import { NewBookingData } from '@/models/booking'
+import { useNewBooking } from '@/hooks/useBooking'
 
 
 interface IFormInput {
@@ -16,7 +19,7 @@ interface IFormInput {
   email: string
   countryCode: CountryCodeModel
   phoneNumber: string
-  passengers: Passenger[]
+  passengers: PassengerData[]
 }
 
 
@@ -35,9 +38,9 @@ const options: CountryCodeModel[] = [
 const BookingForm = () => {
   const params = useSearchParams()
   const totalPassengers = params.get("total-passengers")
-  
+  const [showSeatSelection, setShowSeatSelection] = useState<boolean>(false)
   const [countryCode, setCountryCode] = useState<CountryCodeModel>({ flagCode: "ID", label: "Indonesia (+62)", dialCode: "+62" })
-  const { register, handleSubmit, getValues, setValue } = useForm<IFormInput>({
+  const { register, handleSubmit, getValues, setValue, control, reset } = useForm<IFormInput>({
     defaultValues: {
       fullName: "",
       email: "",
@@ -52,13 +55,35 @@ const BookingForm = () => {
   })
 
   const passengers = getValues().passengers
-  // console.log(params.get("travel-code"), params.get("total-passengers"))
+  const travelId = +params.get('travel-id')!
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data)
+    const bookingData: NewBookingData = {
+      travel_id: travelId,
+      contact_details: {
+        full_name: data.fullName,
+        phone_number: {
+          country_code: data.countryCode.dialCode,
+          number: data.phoneNumber
+        },
+        email: data.email,
+      },
+      passenger_details: data.passengers.map((passenger) => {
+        return {
+          passenger_name: passenger.fullName,
+          passenger_id_type: passenger.identity.type,
+          passenger_id_number: passenger.identity.number,
+          seat_id: passenger.seat.seatId
+        }
+      })
+    }
+
+    createNewBooking(bookingData)
+    console.log(bookingData)
     // console.log(getValues("countryCode"))
   }
 
+  const { error, mutate: createNewBooking } = useNewBooking(reset)
 
   const handleCountryCodeChange = (countryCode: CountryCodeModel) => {
     setCountryCode(countryCode)
@@ -66,6 +91,12 @@ const BookingForm = () => {
   }
 
 
+  const ref = useRef(null)
+  const handleClickOutside = () => {
+    if (showSeatSelection) {
+      setShowSeatSelection(false)
+    }
+  }
   return (
     <div className={styles.bookingForm}>
       <h1>Contact Details</h1>
@@ -126,7 +157,6 @@ const BookingForm = () => {
 
         {passengers.length > 0 && <h1>Passenger Details</h1>}
         {
-
           passengers.map((passenger, index) => (
             <div className={styles.passengerDetails} key={index}>
               <h2>Passenger {index + 1}</h2>
@@ -167,11 +197,21 @@ const BookingForm = () => {
               </div>
             </div>
           )
-
           )
         }
-        <div style={{display:"flex", flexDirection:"row", width:"100%", justifyContent:"space-around"}}>
-          <PrimaryButton type='button' style={{ width: "300px", alignSelf: "center" }}>Select Seats</PrimaryButton>
+        {
+          showSeatSelection
+          &&
+          <Controller
+            control={control}
+            name='passengers'
+            render={({ field: { value, onChange } }) => (
+              <SeatSelections passengerData={value} onChange={onChange} handleClickOutside={handleClickOutside} />
+            )}
+          />
+        }
+        <div style={{ display: "flex", flexDirection: "row", width: "100%", justifyContent: "space-around" }}>
+          <PrimaryButton type='button' style={{ width: "300px", alignSelf: "center" }} onClick={() => { setShowSeatSelection(true) }}>Select Seats</PrimaryButton>
           <PrimaryButton type='submit' style={{ width: "300px", alignSelf: "center" }}>Submit</PrimaryButton>
         </div>
       </form>

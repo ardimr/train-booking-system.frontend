@@ -1,14 +1,16 @@
 import React from 'react'
 import styles from './styles.module.css'
-import { PassengerData, PassengerSeat } from './data'
+import { PassengerData } from '@/models/passenger'
+// import { PassengerData, PassengerSeat } from './data'
 
 interface PassengerProps {
   passengerNumber: number
-  passengerSeat: PassengerSeat
+  passengerSeat: PassengerData
   activePassenger: number
   handleActivePassenger: (passengerNumber: number) => void
 
 }
+
 const Passenger = ({passengerSeat,passengerNumber, activePassenger, handleActivePassenger}:PassengerProps) => {
   const isActive = activePassenger === passengerNumber
   const onClickHandler = (event:React.MouseEvent<HTMLDivElement>) => {
@@ -20,8 +22,8 @@ const Passenger = ({passengerSeat,passengerNumber, activePassenger, handleActive
         {passengerNumber}
       </div>
       <div className={styles["passenger-info"]}>
-        <div className={styles["passenger-name"]}>{passengerSeat.passengerData.name}</div>
-        <div className={styles["passenger-seat"]}>{passengerSeat.seat === null? "No Seat": passengerSeat.seat.seat_label}</div>
+        <div className={styles["passenger-name"]}>{passengerSeat.fullName}</div>
+        <div className={styles["passenger-seat"]}>{passengerSeat.seat === null? "No Seat": passengerSeat.seat?.seatLabel}</div>
       </div>
     </div>
   )

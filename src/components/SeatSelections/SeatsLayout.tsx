@@ -3,9 +3,10 @@ import SeatHeader from './SeatHeader'
 import SeatRow from './SeatRow'
 import { PassengerSeat, RowElement, SeatRowData } from './data'
 import styles from './styles.module.css'
+import { PassengerData } from '@/models/passenger'
 interface props {
   seatRows: SeatRowData[]
-  passengerSeats: PassengerSeat[]
+  passengerSeats: PassengerData[]
   activePassenger: number
   handleSelectSeat: (seat: RowElement, activePassenger: number) => void
 }

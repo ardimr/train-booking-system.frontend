@@ -1,9 +1,9 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import styles from './styles.module.css'
 import SeatRow from './SeatRow'
 import SeatColumn from './SeatHeader'
-import { AvailableSeatsData, PassengerData, PassengerSeat, RowElement, WagonSelector, availableSeats, initialPassengerSeats, passengers, seatRows } from './data'
+import { AvailableSeatsData, PassengerSeat, RowElement, WagonSelector, availableSeats, passengers, seatRows } from './data'
 import SeatHeader from './SeatHeader'
 import Passenger from './Passenger'
 import SeatLegends from './SeatLegends'
@@ -15,9 +15,18 @@ import { useSearchParams } from 'next/navigation'
 import { useTravelById } from '@/hooks/useTravels'
 import { TravelInfo } from '@/models/travel'
 import dayjs from 'dayjs'
+import { PassengerData } from '@/models/passenger'
+import { useOnClickOutside } from 'usehooks-ts'
 
+interface Props {
+  onChange: (...event: any[]) => void
+  passengerData: PassengerData[]
+  handleClickOutside : () => void
+}
 
-const SeatSelections = () => {
+const SeatSelections = (
+  {onChange, passengerData, handleClickOutside}:Props
+) => {
   const params = useSearchParams()
   const travelId = params.get("travel-id")
   const wagonClass = params.get("wagon-class")
@@ -25,9 +34,16 @@ const SeatSelections = () => {
 
   const wagons:WagonSelector[] = data?.map((data:any) => {return {"wagon_class": data.wagon_class, "wagon_number": data.wagon_number}})
 
-  const [passengerSeats, setpassengerSeats] = useState<PassengerSeat[]>(initialPassengerSeats)
+  const initialPassengerSeats:PassengerData[] = passengerData.map((data, index)=> { return {
+    ...data,
+    passengerNumber: index+1,
+
+  }})
+
+  const [passengerSeats, setpassengerSeats] = useState<PassengerData[]>(initialPassengerSeats)
   const [activePassenger, setActivePassenger] = useState<number>(1)
 
+  console.log(passengerSeats)
   const {data:dataTravelInfo, isLoading:isLoadingTravelInfo} = useTravelById(travelId? +travelId : 0)
 
   const intitalActiveWagon = () : WagonSelector=>  {
@@ -47,7 +63,7 @@ const SeatSelections = () => {
     setpassengerSeats(
       passengerSeats.map((passengerSeat) => 
       passengerSeat.passengerNumber === activePassenger
-        ? {...passengerSeat, seat:seat }
+        ? {...passengerSeat, seat:{seatId:seat.seat_id, seatLabel:seat.seat_label}}
         : {...passengerSeat}
       )
     )
@@ -62,7 +78,10 @@ const SeatSelections = () => {
   }
 
   const handleOnDone = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(passengerSeats)
+    
+    onChange(passengerSeats)
+    handleClickOutside()
+    // console.log(passengerSeats)
   }
 
   const travelInfo: TravelInfo =  {
@@ -84,11 +103,13 @@ const SeatSelections = () => {
 
   }
 
-  console.log(travelInfo)
 
   const layoutIndex:number = data?.findIndex((wagon:any) => {return wagon.wagon_number === activeWagon?.wagon_number})
+  
+  const ref = useRef(null)
+  useOnClickOutside(ref, handleClickOutside)
   return (
-    <div className={styles["seats-selection"]}>
+    <div ref={ref} className={styles["seats-selection"]}>
       <div className={styles["travel-info-wrapper"]}>
         {isLoadingTravelInfo
           ? (

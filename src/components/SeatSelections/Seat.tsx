@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import styles from './styles.module.css'
 import { PassengerSeat, RowElement } from './data'
+import { PassengerData } from '@/models/passenger'
 
 enum seatAvailability{
     available,
@@ -12,14 +13,14 @@ enum seatAvailability{
 
 interface SeatProps {
   seatData: RowElement,
-  activeSeats : PassengerSeat[]
+  activeSeats : PassengerData[]
   activePassenger: number
   handleSelectSeats: (seat: RowElement, activePassenger:number) => void
 }
 
 const Seat = ({seatData, activeSeats, handleSelectSeats, activePassenger}:SeatProps) => {
     
-  const passengerSeat = activeSeats.find((passengerSeat) => {return passengerSeat.seat?.seat_id === seatData.seat_id})
+  const passengerSeat = activeSeats.find((passengerSeat) => {return passengerSeat.seat?.seatId === seatData.seat_id})
 
   const onClickHandler = (event: React.MouseEvent<HTMLInputElement>) => {
     handleSelectSeats(seatData, activePassenger)

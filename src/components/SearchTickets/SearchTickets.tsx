@@ -47,8 +47,8 @@ const SearchTickets = () => {
   const router = useRouter()
 
 
-  const handleOnSelect = (travelCode: number) => {
-    router.push(`/booking?travel-code=${travelCode}&total-passengers=${search.totalPassengers}`)
+  const handleOnSelect = (travelId: number) => {
+    router.push(`/booking?travel-id=${travelId}&total-passengers=${search.totalPassengers}`)
 
   }
 
