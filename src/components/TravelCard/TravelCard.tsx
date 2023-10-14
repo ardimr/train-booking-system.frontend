@@ -39,7 +39,7 @@ const TravelCard = ({ travelData, onSelect }: Props) => {
           <div style={{ alignSelf: 'center' }}>
             <BsArrowRightCircle fontSize={20} />
           </div>
-          <div >
+          <div className={styles.subtext} >
             {travelData.duration.hour}j {travelData.duration.minute}m
           </div>
         </div>
