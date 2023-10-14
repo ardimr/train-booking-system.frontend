@@ -12,6 +12,7 @@ import { PassengerData } from '@/models/passenger'
 import SeatSelections from '../SeatSelections/SeatSelections'
 import { NewBookingData } from '@/models/booking'
 import { useNewBooking } from '@/hooks/useBooking'
+import { createPortal } from 'react-dom'
 
 
 interface IFormInput {
@@ -159,7 +160,12 @@ const BookingForm = () => {
         {
           passengers.map((passenger, index) => (
             <div className={styles.passengerDetails} key={index}>
-              <h2>Passenger {index + 1}</h2>
+              <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+                <h2 style={{ marginTop: "5px", marginBottom: "5px" }}>Passenger {index + 1}</h2>
+                <div style={{ alignSelf: "center", borderRadius: "5px", background: "orange", fontSize: "small", padding: "5px", color: "white" }}>
+                  {passenger.seat ? passenger.seat.seatLabel : "No Seat"}
+                </div>
+              </div>
               <div className={styles.fullName}>
                 <div className={styles["label"]}>
                   Full Name
@@ -202,13 +208,15 @@ const BookingForm = () => {
         {
           showSeatSelection
           &&
-          <Controller
-            control={control}
-            name='passengers'
-            render={({ field: { value, onChange } }) => (
-              <SeatSelections passengerData={value} onChange={onChange} handleClickOutside={handleClickOutside} />
-            )}
-          />
+          createPortal(
+            <Controller
+              control={control}
+              name='passengers'
+              render={({ field: { value, onChange } }) => (
+                <SeatSelections passengerData={value} onChange={onChange} handleClickOutside={handleClickOutside} />
+              )}
+            />, document.body
+          )
         }
         <div style={{ display: "flex", flexDirection: "row", width: "100%", justifyContent: "space-around" }}>
           <PrimaryButton type='button' style={{ width: "300px", alignSelf: "center" }} onClick={() => { setShowSeatSelection(true) }}>Select Seats</PrimaryButton>
