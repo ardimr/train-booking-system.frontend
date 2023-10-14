@@ -7,21 +7,25 @@ import TravelInfo from '@/components/BookingForm/TravelInfo'
 import { useSearchParams } from 'next/navigation'
 import { fetchTravelById } from '@/api/travels'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import RootLayout from '@/components/Layout/Layout'
+
+const queryClient = new QueryClient()
 
 const BookingPage = () => {
   const searchParams = useSearchParams()
-  const queryClient = new QueryClient()
   // console.log(searchParams.get("travelId"))
   return (
-    <div className={styles.bookingPage}>
-      <QueryClientProvider client={queryClient}>
-        <div style={{marginTop:"50px"}} />
-        <BookingForm />
-        <div style={{marginLeft:"20px", marginTop:"20px", position:"sticky"}}>
-          <TravelInfo/>
-        </div>
-      </QueryClientProvider>
-    </div>
+    <RootLayout>
+      <div className={styles.bookingPage}>
+        <QueryClientProvider client={queryClient}>
+          <div style={{marginTop:"50px"}} />
+          <BookingForm />
+          <div style={{marginLeft:"20px", marginTop:"20px", position:"sticky"}}>
+            <TravelInfo/>
+          </div>
+        </QueryClientProvider>
+      </div>
+    </RootLayout>
   )
 }
 
