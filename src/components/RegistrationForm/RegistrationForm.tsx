@@ -99,7 +99,7 @@ const RegistrationForm = () => {
 
         {error && <p className={styles.error}>{error.message}</p>}
 
-        <button className={styles.submitButton} style={{alignSelf:"center"}} type='submit' disabled={!isDirty || !isValid} > Register </button>
+        <button className={styles.submitButton} style={{alignSelf:"center"}} type='submit' disabled={!isDirty} > Register </button>
       </form>
       {/* <DevTool control={control} />  */}
     </div>
