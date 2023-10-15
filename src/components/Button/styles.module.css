@@ -9,7 +9,8 @@
 }
 
 .primaryButton:hover {
-    background-color: #90C6FF;
+  cursor: pointer;
+  background-color: #90C6FF;
 }
 
 .primaryButton:active {
@@ -56,6 +57,7 @@
 }
 
 .secondary-button:hover {
+  cursor: pointer;
   background-color: #90C6FF;
 }
 
