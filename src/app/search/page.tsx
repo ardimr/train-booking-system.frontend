@@ -5,9 +5,9 @@ import TravelCard from '@/components/TravelCard/TravelCard'
 import { QueryClientProvider, QueryClient } from 'react-query'
 import RootLayout from '@/components/Layout/Layout'
 
+const queryClient = new QueryClient()
 
 const Search = () => {
-  const queryClient = new QueryClient()
 
   return (
     <RootLayout>
