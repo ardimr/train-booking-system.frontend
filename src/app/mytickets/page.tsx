@@ -1,12 +1,19 @@
+"use client"
 import RootLayout from '@/components/Layout/Layout'
+import Tickets from '@/components/Tickets/Tickets'
 import React from 'react'
+import { QueryClientProvider, QueryClient } from 'react-query'
 
-const page = () => {
+const queryClient = new QueryClient()
+
+const MyTickets = () => {
   return (
     <RootLayout>
-      <div>This is My Ticket Page</div>
+       <QueryClientProvider client={queryClient}>
+          <Tickets />
+       </QueryClientProvider>
     </RootLayout>
   )
 }
 
-export default page
+export default MyTickets
