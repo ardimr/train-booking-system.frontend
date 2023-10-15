@@ -1,5 +1,5 @@
 export type RegistrationData =  {
-  name: string
+  fullname: string
   username: string
   password: string
   email: string

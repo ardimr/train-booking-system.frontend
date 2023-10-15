@@ -53,7 +53,7 @@ const RegistrationForm = () => {
     console.log(data)
     
     const registrationData: RegistrationData = {
-      name : data.fullName,
+      fullname : data.fullName,
       username: data.username,
       email: data.email,
       password: data.password,
