@@ -1,8 +1,14 @@
 import { useMutation } from "react-query";
 import { loginUser } from "@/api/login";
 import { UseFormReset, UseFormSetError } from "react-hook-form";
-import { AxiosError } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
+import { string } from "zod";
 
+
+type loginResponse = {
+  access_token :string
+  refresh_token: string
+}
 export const useLogin = (reset: UseFormReset<any>) => {
   return useMutation(loginUser,
       {
@@ -13,7 +19,8 @@ export const useLogin = (reset: UseFormReset<any>) => {
             error.message = "Internal Server Error"
           }
         },
-        onSuccess: () => {
+        onSuccess: (data: AxiosResponse) => {
+          sessionStorage.setItem('token', data.data.access_token)
           reset()
         }
       }
