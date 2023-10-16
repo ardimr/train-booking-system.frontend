@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export const getUserTickets = async () => {
-  const accessToken = sessionStorage.getItem('token')
+  const accessToken = localStorage.getItem('token')
   const headers = {
     'Authorization': `Bearer ${accessToken}`,
     'Content-Type': 'application/json',

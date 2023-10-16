@@ -3,13 +3,11 @@ import { loginUser } from "@/api/login";
 import { UseFormReset, UseFormSetError } from "react-hook-form";
 import { AxiosError, AxiosResponse } from "axios";
 import { string } from "zod";
+import { useRouter } from "next/navigation";
 
 
-type loginResponse = {
-  access_token :string
-  refresh_token: string
-}
 export const useLogin = (reset: UseFormReset<any>) => {
+  const router = useRouter()
   return useMutation(loginUser,
       {
         onError: (error:AxiosError) => {
@@ -20,7 +18,8 @@ export const useLogin = (reset: UseFormReset<any>) => {
           }
         },
         onSuccess: (data: AxiosResponse) => {
-          sessionStorage.setItem('token', data.data.access_token)
+          localStorage.setItem('token', data.data.access_token)
+          router.push("/search")
           reset()
         }
       }
