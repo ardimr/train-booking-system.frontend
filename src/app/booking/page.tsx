@@ -9,7 +9,6 @@ import { fetchTravelById } from '@/api/travels'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import RootLayout from '@/components/Layout/Layout'
 
-const queryClient = new QueryClient()
 
 const BookingPage = () => {
   const searchParams = useSearchParams()
@@ -17,13 +16,11 @@ const BookingPage = () => {
   return (
     <RootLayout>
       <div className={styles.bookingPage}>
-        <QueryClientProvider client={queryClient}>
-          <div style={{marginTop:"50px"}} />
-          <BookingForm />
-          <div style={{marginLeft:"20px", marginTop:"20px", position:"sticky"}}>
-            <TravelInfo/>
-          </div>
-        </QueryClientProvider>
+        <div style={{marginTop:"50px"}} />
+        <BookingForm />
+        <div style={{marginLeft:"20px", marginTop:"20px", position:"sticky"}}>
+          <TravelInfo/>
+        </div>
       </div>
     </RootLayout>
   )

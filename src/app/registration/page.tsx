@@ -4,14 +4,13 @@ import React from 'react'
 import styles from './page.module.css'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
+const queryClient = new QueryClient()
 const page = () => {
-  const queryQlient = new QueryClient()
   return (
     <div className={styles.container}>
-        <QueryClientProvider client={queryQlient}>
+        <QueryClientProvider client={queryClient}>
           <RegistrationForm />
         </QueryClientProvider>
-        
     </div>
   )
 }

@@ -7,12 +7,12 @@ import React from 'react'
 import styles from './page.module.css'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
+const queryClient = new QueryClient()
 const page = () => {
-  const queryClient = new QueryClient()
   return (
     <div className={styles["container"]}>
         <QueryClientProvider client={queryClient}>
-          <SeatSelections />
+          {/* <SeatSelections /> */}
         </QueryClientProvider>
 
     </div>
