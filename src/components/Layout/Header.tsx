@@ -4,6 +4,7 @@ import styles from './styles.module.css'
 import Link from 'next/link'
 import { useRouter } from "next/navigation"
 import SecondaryButton from '../Button/SecondaryButton'
+import { LiaTrainSolid } from 'react-icons/lia'
 
 
 interface NavItemProps {
@@ -31,6 +32,7 @@ const NavBar = () => {
   const handleLogout = () => {
     localStorage.removeItem('token')
     setIsAuthenticated(false);
+    router.push('/search')
   }
   
   useEffect(() => {
@@ -58,15 +60,15 @@ const NavBar = () => {
                     <NavItem link='/profile' label='Profile' />
                   </li>
                   <li>
-                    <SecondaryButton onClick={handleLogout}>Logout</SecondaryButton>
+                    <SecondaryButton style={{padding:"5px 10px", marginLeft:"5px"}} onClick={handleLogout}>Logout</SecondaryButton>
                   </li>
                 </>
               : <>
-                <li>
-                  <SecondaryButton onClick={() => { router.push('/login') }}>Login</SecondaryButton>
+                <li style={{marginRight:"10px"}}>
+                  <SecondaryButton style={{padding:"5px 10px", marginLeft:"5px"}} onClick={() => { router.push('/login') }}>Login</SecondaryButton>
                 </li>
-                <li>
-                  <SecondaryButton onClick={() => { router.push('/registration') }}>Register</SecondaryButton>
+                <li style={{marginRight:"10px"}}>
+                  <SecondaryButton style={{padding:"5px 10px"}} onClick={() => { router.push('/registration') }}>Register</SecondaryButton>
                 </li>
               </>
           }
@@ -82,8 +84,11 @@ const Header = () => {
   return (
     <header style={{ position: "sticky", top: "0", backgroundColor: "white" }}>
       <div className={styles['container']}>
-        <div style={{ display: "flex", justifySelf: "center", padding: "10px", width: "auto" }}>
-          Train Booking System
+        <div style={{ display: "flex", justifySelf: "center", padding: "10px", alignItems:"center" }}>
+          <LiaTrainSolid size={48}/>
+          <div style={{display:"flex", fontWeight:"bold", fontSize:"24px", width: "300px"}}>
+            Train Booking System
+          </div>
         </div>
         <NavBar />
       </div>
