@@ -13,4 +13,19 @@ export const getUserTickets = async () => {
   )
 
   return data
-} 
+}
+
+export const getTicketDetails = async (id:number) => {
+  const accessToken = localStorage.getItem('token')
+  const headers = {
+    'Authorization': `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+
+  const {data} = await axios.get(
+    `http://localhost:8080/api/v1/tickets/${id}`,
+    {headers}
+  )
+
+  return data
+}
