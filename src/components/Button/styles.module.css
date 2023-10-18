@@ -19,6 +19,7 @@
 
 .primaryButton:disabled {
     background-color: #E3E9F0;
+    cursor: unset;
 }
 
 .primaryButton div {
@@ -54,6 +55,7 @@
   border-radius: 5px;
   /* font-size: 14px; */
   background-color: #43A1FE;
+  transition: 0.2s;
 }
 
 .secondary-button:hover {

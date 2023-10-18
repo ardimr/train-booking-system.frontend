@@ -15,7 +15,7 @@ const SecondaryButton: React.FC<Props> = ({
 }: Props) => {
   return (
     <button className={styles["secondary-button"]} disabled={disabled} type='submit' onClick={onClick} {...Props}>
-        <div >{children}</div>
+        {children}
     </button>
   )
 }
