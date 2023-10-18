@@ -10,6 +10,8 @@ const Tickets = () => {
     return {
       UserID: data.user_id,
       TicketID : data.ticket_id,
+      BookingCode: data.booking_code,
+      Status: data.status,
       TravelCode : data.travel_code,
       DepartureStation : {
         Code: data.departure_station.code,

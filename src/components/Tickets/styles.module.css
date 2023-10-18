@@ -2,7 +2,28 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 700px;
+  width: 600px;
+  height: 150;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 1px solid #C5C5C5;
+  background: #ffffff;
+  /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); */
+  padding: 20px;
+  margin-top: 10px;
+}
+
+.ticket-card:hover {
+  cursor: pointer;
+  border: 1px solid #43A1FE;
+}
+
+.ticket-detail-card{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 600px;
   height: 150;
   box-sizing: border-box;
   flex-shrink: 0;
