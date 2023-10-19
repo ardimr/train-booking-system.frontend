@@ -3,8 +3,10 @@ import { AxiosError } from 'axios'
 import { FieldValues, UseFormReset } from "react-hook-form";
 import { IFormInput } from "@/components/RegistrationForm/RegistrationForm";
 import { PostNewBooking } from "@/api/booking";
+import { useRouter } from "next/navigation";
 
 export const useNewBooking = (reset: UseFormReset<any>) => {
+  const router = useRouter()
   return useMutation(PostNewBooking,
       {
         onError: (error: AxiosError) => {
@@ -14,6 +16,7 @@ export const useNewBooking = (reset: UseFormReset<any>) => {
         },
         onSuccess: () => {
           reset()
+          router.push('/mytickets')
         }
       }
     )

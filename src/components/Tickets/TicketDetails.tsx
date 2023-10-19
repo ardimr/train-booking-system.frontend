@@ -11,9 +11,10 @@ const TicketDetails = ({ticketID}: TicketDetailProps) => {
   // console.log(data)
   
   return (
-    <>
+    <div>
+      <h1>My Tickets</h1>
       {data && <TicketDetailsCard data={data} />}
-    </>
+    </div>
   )
 }
 

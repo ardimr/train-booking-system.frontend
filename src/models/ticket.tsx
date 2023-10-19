@@ -38,6 +38,7 @@ type Passenger = {
 export type TicketDetailsData = {
   user_id : number
   ticket_id: number
+  travel_id: number
   booking_code: string
   status : string
   travel_code: string

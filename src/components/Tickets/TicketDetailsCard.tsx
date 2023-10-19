@@ -5,6 +5,7 @@ import { LiaTrainSolid } from 'react-icons/lia'
 import dayjs from 'dayjs'
 import { Divider } from '@mui/material'
 import PrimaryButton from '../Button/PrimaryButton'
+import { payBooking } from '@/api/tickets'
 
 interface Props {
   data: TicketDetailsData
@@ -13,6 +14,12 @@ const TicketDetailsCard = ({data}: Props) => {
   console.log(data)
   const departureSchedule =  dayjs(data.departure_schedule)
   const arrivalSchedule = dayjs(data.arrival_schedule)
+
+  const handleClick = () => {
+    payBooking(data.travel_id, data.booking_code).then(() =>
+      window.location.reload() // Reload the page
+    )
+  }
   return (
     <div className={styles['ticket-detail-card']}>
       <div style={{display:"flex", flexDirection:"row",justifyContent:"space-between", padding:"0px 0 8px 0"}}>
@@ -34,12 +41,9 @@ const TicketDetailsCard = ({data}: Props) => {
           </div>
         </div>
       </div>
-      <div style={{display:"flex", flexDirection:"row", paddingBottom:"12px", alignItems:'center'}}>
-        
-      </div>
       <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
         <div style={{minWidth:"40%"}}>
-          <div style={{fontWeight:"600"}}>
+          <div style={{fontWeight:"600", padding:"8px 0px"}}>
             Departure
           </div>
           <div style={{fontSize:"smaller"}}>
@@ -50,7 +54,7 @@ const TicketDetailsCard = ({data}: Props) => {
           </div>
         </div>
         <div style={{minWidth:"40%"}}>
-          <div style={{fontWeight:"600"}}>
+          <div style={{fontWeight:"600",padding:"8px 0px"}}>
             Arrival
           </div>
           <div style={{fontSize:"smaller"}}>
@@ -61,8 +65,8 @@ const TicketDetailsCard = ({data}: Props) => {
           </div>
         </div>
       </div>
-      <Divider style={{marginTop:"8px"}}/>
-      <h3>Passengers</h3>
+      <Divider style={{margin:"8px 0px"}}/>
+      <h3 style={{margin:"0"}}>Passengers</h3>
       {data.passengers.map((passenger) => 
         <div key={passenger.passenger_id} style={{padding:"8px 0px"}}>
             <div style={{fontWeight:"600"}}> 
@@ -78,7 +82,13 @@ const TicketDetailsCard = ({data}: Props) => {
             </div>
         </div>
       )}
-      <PrimaryButton style={{maxWidth:"40%", alignSelf:"center"}} disabled={data.status === 'PAID'}>Pay</PrimaryButton>
+      <PrimaryButton 
+        style={{maxWidth:"40%", alignSelf:"center"}}
+        disabled={data.status === 'PAID'}
+        onClick={handleClick}
+      >
+        Pay
+      </PrimaryButton>
     </div>
   )
 }

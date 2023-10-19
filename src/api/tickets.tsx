@@ -29,3 +29,18 @@ export const getTicketDetails = async (id:number) => {
 
   return data
 }
+
+export const payBooking = async (travel_id: number, booking_code: string) => {
+  const accessToken = localStorage.getItem('token')
+  const headers = {
+    'Authorization': `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+
+  const {data} = await axios.get(
+    `http://localhost:8080/api/v1/bookings/payment/webhook?travel_id=${travel_id}&booking_code=${booking_code}`,
+    {headers}
+  )
+  
+  return data
+}
