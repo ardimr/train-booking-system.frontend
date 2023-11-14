@@ -61,7 +61,7 @@ const LoginForm = () => {
         <InputPassword name='password' label='password' placeholder='Enter password' register={register}/>
         
         {error?.message && <div className={styles["error"]} style={{alignSelf:"center", margin:"5px 0px 0px 0px"}}>{error.message}</div>}
-        <SecondaryButton style={{marginTop:"15px", fontSize:"14px", color:"white"}} type='submit' children='Submit' disabled={!isDirty || !isValid}/>
+        <SecondaryButton style={{marginTop:"15px", fontSize:"14px", color:"white"}} type='submit' disabled={!isDirty || !isValid}>Submit</SecondaryButton>
 
     </form>
   )

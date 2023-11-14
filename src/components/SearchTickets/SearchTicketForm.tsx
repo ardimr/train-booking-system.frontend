@@ -122,7 +122,7 @@ const SearchTicketForm = ({
                 <div className={styles.departureDate} />
                 
                 <div className={styles.searchButton} >
-                    <PrimaryButton type='submit' disabled= {false} children='Search Trains'/>
+                    <PrimaryButton type='submit' disabled= {false}> Search Trains </PrimaryButton>
                 </div>              
             </div>
         </div>

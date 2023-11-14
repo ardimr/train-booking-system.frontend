@@ -64,7 +64,7 @@ const TravelCard = ({ travelData, onSelect }: Props) => {
           Available
         </div>
         <div className={styles.selectButton} >
-          <PrimaryButton disabled={false} children='Select' onClick={() => onSelect(travelData.travel_id, travelData.wagon_class.wagon_class_code)}/>
+          <PrimaryButton disabled={false} onClick={() => onSelect(travelData.travel_id, travelData.wagon_class.wagon_class_code)}>Select</PrimaryButton>
         </div>
 
       </div>

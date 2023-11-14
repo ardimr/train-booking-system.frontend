@@ -1,4 +1,5 @@
 "use client"
+
 import ContactDetails from '@/components/ContactDetails/ContactDetails'
 import React from 'react'
 import styles from './page.module.css'

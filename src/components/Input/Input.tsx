@@ -9,7 +9,7 @@ interface InputProps {
     placeholder: string
     // error: boolean
     disabled?: boolean,
-    register: UseFormRegister<any>
+    register?: any
   }
 const Input: React.FC<InputProps> = (
     { type, label, name, placeholder, disabled, register} : InputProps
