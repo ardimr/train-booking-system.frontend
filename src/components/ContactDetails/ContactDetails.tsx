@@ -76,7 +76,7 @@ const ContactDetails = () => {
                 placeholder='Enter your full name' 
                 label='Full Name'
                 name='Full Name'
-                onChange={handleNameChange}
+                // onChange={handleNameChange}
             />
             
         </div>
@@ -103,7 +103,7 @@ const ContactDetails = () => {
                     placeholder='8123456789' 
                     label='phone number'
                     name='phone number'
-                    onChange={handlePhoneNumberChange}
+                    // onChange={handlePhoneNumberChange}
                 />
             </div>
              
@@ -113,12 +113,12 @@ const ContactDetails = () => {
                 Email
             </div>
             <Input 
-                 {...register("email", { required: true})}
+                {...register("phoneNumber", { required: true})}
                 type='text' 
                 placeholder='Enter your email' 
                 label='email'
                 name='email'
-                onChange={handleEmailChange}
+                // onChange={handleEmailChange}
             />
         </div>
         <button type='submit' style={{width:"200px", height:"20px"}}/>
