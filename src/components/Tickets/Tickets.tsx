@@ -29,9 +29,9 @@ const Tickets = () => {
   })
   
   return (
-    <div>
-      <h1>My Tickets</h1>
-      <div style={{display:"flex", flexDirection:"column", overflowY:"hidden"}}>
+    <div style={{display:"flex", flexDirection:"column", width:"600px"}}>
+      <h1 style={{justifySelf:"flex-start"}}>My Tickets</h1>
+      <div style={{display:"flex", flexDirection:"column", overflowY:"hidden", marginBottom:"10px"}}>
         {tickets?.map((ticket) => <TicketCard key={ticket.TicketID} data={ticket}/>)}
       </div>
     </div>
