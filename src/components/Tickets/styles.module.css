@@ -1,7 +1,6 @@
 .ticket-card{
   display: flex;
   flex-direction: column;
-  position: relative;
   width: 600px;
   height: 150;
   box-sizing: border-box;
