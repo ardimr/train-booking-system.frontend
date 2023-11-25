@@ -27,5 +27,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
+          build-args: |
+            NEXT_PUBLIC_BACKEND_ENDPOINT=${{secrets.NEXT_PUBLIC_BACKEND_ENDPOINT}}
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest

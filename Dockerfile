@@ -19,6 +19,10 @@ RUN \
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
+
+ARG NEXT_PUBLIC_BACKEND_ENDPOINT
+ENV NEXT_PUBLIC_BACKEND_ENDPOINT=${NEXT_PUBLIC_BACKEND_ENDPOINT}
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
