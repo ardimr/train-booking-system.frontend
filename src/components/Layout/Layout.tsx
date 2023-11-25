@@ -43,8 +43,11 @@ const RootLayout = ({
   return (
     <div className={styles['layout']}>
       <QueryClientProvider client={queryClient}>
-        <Header />
+        <header>
+          <Header />
+        </header>
         <main> {children} </main>
+        <footer/>
       </QueryClientProvider>
     </div>
   )
