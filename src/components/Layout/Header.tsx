@@ -32,7 +32,7 @@ const NavBar = () => {
   const handleLogout = () => {
     localStorage.removeItem('token')
     setIsAuthenticated(false);
-    router.push('/search')
+    router.push('/')
   }
   
   useEffect(() => {
@@ -46,17 +46,17 @@ const NavBar = () => {
   return (
     <div className={styles['navbar']}>
       <ul className={styles['navbar-row']}>
-        <li>
-          <NavItem link='/search' label='Search' />
+        <li className={styles['navbar-li']}>
+          <NavItem link='/' label='Search' />
         </li>
-        <li>
+        <li className={styles['navbar-li']}>
           <NavItem link='/mytickets' label='My Tickets' />
         </li>
         <>
           {
             isAuthenticated
               ? <>
-                  <li>
+                  <li className={styles['navbar-li']}>
                     <NavItem link='/profile' label='Profile' />
                   </li>
                   <li>
