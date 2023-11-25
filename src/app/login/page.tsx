@@ -4,17 +4,16 @@ import LoginForm from '@/components/LoginForm/LoginForm'
 import React from 'react'
 import styles from './page.module.css'
 import { QueryClientProvider, QueryClient } from 'react-query'
+import RootLayout from '@/components/Layout/Layout'
 
 const queryClient = new QueryClient()
 const page = () => {
   return (
-    
-    <div className={styles.container}>
-        <QueryClientProvider client={queryClient}>
-          <LoginForm />
-        </QueryClientProvider>
-        
-    </div>
+    <RootLayout>
+      <div className={styles.container}>
+            <LoginForm />          
+      </div>
+    </RootLayout>
   )
 }
 
