@@ -9,12 +9,13 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
 .navbar ul {
   padding-inline-start: 0;
 }
 
 .navbar ul li {
-  margin-left: 5px;
+  margin-left: 10px;
 }
 .navbar{
   display: flex;

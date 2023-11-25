@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter } from "next/navigation"
 import SecondaryButton from '../Button/SecondaryButton'
 import { LiaTrainSolid } from 'react-icons/lia'
+import DropdownProfile from '../DropdownProfile/DropdownProfile'
 
 
 interface NavItemProps {
@@ -28,7 +29,11 @@ const NavItem = ({
 const NavBar = () => {
   const router = useRouter()  
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  
+  const [openProfile, setOpenProfile] = useState<boolean>(false);
+
+  const handleClickOpenProfile = () => {
+    setOpenProfile(!openProfile);
+  }
   const handleLogout = () => {
     localStorage.removeItem('token')
     setIsAuthenticated(false);
@@ -47,7 +52,7 @@ const NavBar = () => {
     <div className={styles['navbar']}>
       <ul className={styles['navbar-row']}>
         <li className={styles['navbar-li']}>
-          <NavItem link='/' label='Search' />
+          <NavItem link='/' label='Search Tickets' />
         </li>
         <li className={styles['navbar-li']}>
           <NavItem link='/mytickets' label='My Tickets' />
@@ -56,12 +61,10 @@ const NavBar = () => {
           {
             isAuthenticated
               ? <>
-                  <li className={styles['navbar-li']}>
-                    <NavItem link='/profile' label='Profile' />
+                  <li style={{marginLeft:"20px"}}>
+                    <DropdownProfile handleLogout={handleLogout}/>
                   </li>
-                  <li>
-                    <SecondaryButton style={{padding:"5px 10px", marginLeft:"5px", backgroundColor:"white", color:"#4899e5"}} onClick={handleLogout}>Logout</SecondaryButton>
-                  </li>
+                  
                 </>
               : <>
                 <li style={{marginRight:"10px"}}>
@@ -90,8 +93,6 @@ const NavBar = () => {
               </>
           }
         </>
-
-
       </ul>
     </div>
   )

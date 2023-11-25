@@ -1,5 +1,5 @@
 .searchTickets {
-    position: relative;
+    /* position: relative; */
     width: 900px;
     height: fit-content;
     box-sizing: border-box;
@@ -12,7 +12,7 @@
 }
 
 .title {
-    position: relative;
+    /* position: relative; */
     color: #3F9CF2;
     /* font-family: Roboto; */
     font-size: 28px;
@@ -22,7 +22,7 @@
 }
 
 .SearchStationsContainer {
-    position: relative;
+    /* position: relative; */
     /* align-items: center;
     justify-content: center; */
     display: flex;
@@ -33,7 +33,7 @@
 }
 
 .originStationBox {
-    position: relative;
+    /* position: relative; */
     width: 100%;
     height: 60px;
     /* background-color: antiquewhite; */
@@ -41,7 +41,7 @@
 }
 
 .destinationStationBox {
-    position: relative;
+    /* position: relative; */
     width: 100%;
     height: 60px;
     /* background-color: antiquewhite; */
@@ -58,7 +58,7 @@
 }
 
 .secondContainer {
-    position: relative;
+    /* position: relative; */
     /* align-items: center; 
     justify-content: center; */
     display: flex;
