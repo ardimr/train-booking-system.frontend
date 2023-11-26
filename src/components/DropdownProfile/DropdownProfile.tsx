@@ -29,7 +29,7 @@ const DropdownProfile = (
           <ul className={styles['dropdown-list']}>
             <li>
               <span>
-                <img src='ticket.svg'/>
+                <img src='/ticket.svg'/>
                 <Link href={'/mytickets'}>
                   Tickets
                 </Link>
@@ -38,7 +38,7 @@ const DropdownProfile = (
             {/* <li>Tickets</li> */}
             <li>
               <span>
-                <img src='off.svg'/>
+                <img src='/off.svg'/>
                 <button onClick={handleLogout}>
                   Logout
                 </button>
