@@ -50,7 +50,7 @@ const RegistrationForm = () => {
   const {mutate: registerUser, isError, error, isSuccess} = useRegistration(reset)
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    console.log(data)
+    // console.log(data)
     
     const registrationData: RegistrationData = {
       fullname : data.fullName,

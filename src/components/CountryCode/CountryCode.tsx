@@ -23,7 +23,7 @@ const CountryCode = (
   const ref = useRef(null)
   
   const handleInputClick = () => {
-    console.log("Clicked")
+    // console.log("Clicked")
     setShowMenu(!showMenu)
   }
 

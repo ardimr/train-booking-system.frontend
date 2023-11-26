@@ -36,7 +36,7 @@ const LoginForm = () => {
   const {mutate:loginUser, isError, data, error, } = useLogin(reset)
   
   const onSubmit: SubmitHandler<IFormInput> = async (formData) => {
-    console.log(formData)
+    // console.log(formData)
     
     // Login
     const loginData: LoginData = {
@@ -46,7 +46,7 @@ const LoginForm = () => {
 
     loginUser(loginData)
 
-    console.log(data?.data)
+    // console.log(data?.data)
 
   }
 
