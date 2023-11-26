@@ -8,7 +8,7 @@ export const getUserTickets = async () => {
   };
 
   const {data} = await axios.get(
-    `http://localhost:8080/api/v1/tickets`,
+    `http://${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/api/v1/tickets`,
     {headers}
   )
 
