@@ -86,11 +86,14 @@ const BookingForm = () => {
 
   const { error, mutate: createNewBooking } = useNewBooking(reset)
 
+  if (error?.response?.status === 401) {
+    window.location.href = '/login'
+  }
+
   const handleCountryCodeChange = (countryCode: CountryCodeModel) => {
     setCountryCode(countryCode)
     setValue("countryCode", countryCode)
   }
-
 
   const ref = useRef(null)
   const handleClickOutside = () => {
