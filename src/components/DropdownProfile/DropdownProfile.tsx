@@ -20,7 +20,7 @@ const DropdownProfile = (
   return (
     <div ref={ref} style={{position:"relative"}}>
       <div className={styles['dropdown-profile']} onClick={()=> {setOpenProfile(!openProfile)}}>
-        <img src='user_profile.svg'></img>
+        <img src='/user_profile.svg'></img>
       </div>
 
       {openProfile && (
