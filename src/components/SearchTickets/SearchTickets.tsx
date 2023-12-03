@@ -18,7 +18,7 @@ export interface SearchFormInput {
 }
 
 const SearchTickets = () => {
-  const {control, handleSubmit, getValues} = useForm<SearchFormInput>(
+  const {control, handleSubmit, getValues, formState} = useForm<SearchFormInput>(
     {
       defaultValues: {
         departureStation: {
@@ -37,10 +37,9 @@ const SearchTickets = () => {
   
   
   const [search, setSearch] = useState<SearchFormInput>(getValues)
-  const {data:travelData} = useTravels(search)
+  const {data:travelData, isLoading, refetch} = useTravels(search)
   
   const onSubmit: SubmitHandler<SearchFormInput> = async (form) => {
-    // console.log(form.selectedDate.format('YYYY/MM/DD'))
     setSearch(form)
   }
 
@@ -52,7 +51,6 @@ const SearchTickets = () => {
 
   }
 
-  // console.log(data)
   return (
     <div style={{display: "flex", flexDirection:"column", alignItems:"center", marginBottom:"20px"}}>
       
@@ -63,10 +61,17 @@ const SearchTickets = () => {
       />
       
       <div style={{height:'35px'}} />
-      
-      {travelData?.map((travel:TravelData, index:number) =>
-        <TravelCard key={index} travelData={travel} onSelect={handleOnSelect}/>
-      )}
+
+      {formState.isSubmitted
+        ? isLoading
+          ? <div> Searching Tickets ... </div>
+          : travelData
+            ? travelData.map((travel:TravelData, index:number) =>
+              <TravelCard key={index} travelData={travel} onSelect={handleOnSelect}/>
+              )
+            : <div> Ooops.. No Train is Avaliable </div>
+        : <></>
+      }
     </div>
   )
 }
