@@ -43,10 +43,10 @@ const RootLayout = ({
   return (
     <div className={styles['layout']}>
       <QueryClientProvider client={queryClient}>
-        <header style={{zIndex:"1", position:"sticky",top:"0", width:"100%"}}>
+        <header style={{zIndex:"1",position:"fixed",top:"0", width:"100%"}}>
           <Header />
         </header>
-        <main style={{zIndex:"0"}}> {children} </main>
+        <main style={{zIndex:"0",marginTop:"75px"}}> {children} </main>
         <footer/>
       </QueryClientProvider>
     </div>
